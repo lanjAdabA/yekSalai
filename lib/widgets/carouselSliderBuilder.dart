@@ -90,7 +90,8 @@ class _carouselSliderBuilderState extends State<carouselSliderBuilder> {
           },
           carouselController: _controller,
           options: CarouselOptions(
-            height: 400,
+            height: 300,disableCenter: false,
+            
             enableInfiniteScroll: true,
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 3),

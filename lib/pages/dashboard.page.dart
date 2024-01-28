@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yeksalai/widgets/carouselSliderBuilder.dart';
+import 'package:yeksalai/widgets/listWheelScrollView.dart';
 
 class DashBoardPage extends StatelessWidget {
   const DashBoardPage({Key? key}) : super(key: key);
@@ -17,8 +18,7 @@ class DashBoardPage extends StatelessWidget {
       },
       {
         "Yek": "Khuman",
-        "Machu": Colors.black,
-      },
+        "Machu": Colors.black,},
       {
         "Yek": "Angom",
         "Machu": Colors.yellow,
@@ -37,6 +37,16 @@ class DashBoardPage extends StatelessWidget {
       },
     ];
 
-    return carouselSliderBuilder(dataMap: dataMap);
+    return  Scaffold(appBar: AppBar(title: Text("Yek Salai"),),
+     drawer: Drawer(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+        const ListWheelScroll(),
+            carouselSliderBuilder(dataMap: dataMap),
+          ],
+        ),
+      ),
+    );
   }
 }
