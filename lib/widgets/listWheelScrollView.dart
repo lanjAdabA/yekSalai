@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:yeksalai/constant/constant.dart';
+import 'package:yeksalai/router/router.gr.dart';
 
 class ListWheelScroll extends StatefulWidget {
   const ListWheelScroll({Key? key}) : super(key: key);
@@ -8,43 +11,61 @@ class ListWheelScroll extends StatefulWidget {
 }
 
 class _ListWheelScrollState extends State<ListWheelScroll> {
-  final Map<String, Color> itemColorMap = {
-    'Mangang': Colors.red,
-    'Luwang': Colors.white,
-    'Khuman': Colors.black,
-    'Angom': Colors.yellow,
-    'Moirang': Colors.brown,
-    'Khaba Nganba': Colors.teal,
-    'Sarang Leishangthem': Colors.green,
-  };
+  int selectedIndex = 0;
 
-  TextStyle _buttonTextStyle() {
+  TextStyle _buttonTextStyle(String itemName) {
+    Color textColor = Colors.black;
+    if (itemName == 'Khuman') {
+      textColor = Colors.grey;
+    }
     return TextStyle(
-      fontSize: 25,
-      color: const Color.fromARGB(255, 44, 44, 44),
+      fontSize: 38,
+      color: textColor,
       fontWeight: FontWeight.bold,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-   double screenHeight = MediaQuery.of(context).size.height;
-   double screenWidth = MediaQuery.of(context).size.width;
-    return Container(padding: EdgeInsets.symmetric(horizontal:20),
-      height: screenHeight/2,
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      height: screenHeight / 2,
       child: ListWheelScrollView(
+        onSelectedItemChanged: (value) {
+          setState(() {
+            selectedIndex = value;
+          });
+          // context.router.push(YekSalaiRoute(yekIndex: selectedIndex));
+          print(selectedIndex.toString());
+        },
         itemExtent: 120,
-        clipBehavior: Clip.antiAlias,
+        diameterRatio: 2.4,
+        // offAxisFraction: 1,
+        physics: const BouncingScrollPhysics(),
+        squeeze: 1,
+        perspective: 0.002, clipBehavior: Clip.antiAlias,
         children: itemColorMap.keys.map((item) {
           final color = itemColorMap[item];
-          return Container( height: screenHeight/4,
-          width: screenWidth,
-             decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
-            child: Center(
-              child: Text(
-                item,
-                textAlign: TextAlign.center,
-                style: _buttonTextStyle(),
+          return GestureDetector(
+            onTap: () {
+              int index = itemColorMap.keys.toList().indexOf(item);
+
+              context.router
+                  .push(YekSalaiRoute(yekIndex: index, yekColor: color!));
+            },
+            child: Container(
+              height: screenHeight / 4,
+              width: screenWidth,
+              decoration: BoxDecoration(
+                  color: color, borderRadius: BorderRadius.circular(12)),
+              child: Center(
+                child: Text(
+                  item,
+                  textAlign: TextAlign.center,
+                  style: _buttonTextStyle(item),
+                ),
               ),
             ),
           );
@@ -53,4 +74,3 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
     );
   }
 }
-  
