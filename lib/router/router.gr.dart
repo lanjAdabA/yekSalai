@@ -32,7 +32,7 @@ abstract class $AppRouter extends _i3.RootStackRouter {
         routeData: routeData,
         child: _i2.YekSalaiPage(
           key: args.key,
-          yekIndex: args.yekIndex,
+          yekPageIndex: args.yekPageIndex,
           yekColor: args.yekColor,
         ),
       );
@@ -59,14 +59,14 @@ class DashBoardRoute extends _i3.PageRouteInfo<void> {
 class YekSalaiRoute extends _i3.PageRouteInfo<YekSalaiRouteArgs> {
   YekSalaiRoute({
     _i4.Key? key,
-    required int yekIndex,
+    required int yekPageIndex,
     required _i5.Color yekColor,
     List<_i3.PageRouteInfo>? children,
   }) : super(
           YekSalaiRoute.name,
           args: YekSalaiRouteArgs(
             key: key,
-            yekIndex: yekIndex,
+            yekPageIndex: yekPageIndex,
             yekColor: yekColor,
           ),
           initialChildren: children,
@@ -81,18 +81,18 @@ class YekSalaiRoute extends _i3.PageRouteInfo<YekSalaiRouteArgs> {
 class YekSalaiRouteArgs {
   const YekSalaiRouteArgs({
     this.key,
-    required this.yekIndex,
+    required this.yekPageIndex,
     required this.yekColor,
   });
 
   final _i4.Key? key;
 
-  final int yekIndex;
+  final int yekPageIndex;
 
   final _i5.Color yekColor;
 
   @override
   String toString() {
-    return 'YekSalaiRouteArgs{key: $key, yekIndex: $yekIndex, yekColor: $yekColor}';
+    return 'YekSalaiRouteArgs{key: $key, yekPageIndex: $yekPageIndex, yekColor: $yekColor}';
   }
 }

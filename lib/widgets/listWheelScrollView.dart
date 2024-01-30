@@ -34,11 +34,11 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
       height: screenHeight / 2,
       child: ListWheelScrollView(
         onSelectedItemChanged: (value) {
-          setState(() {
-            selectedIndex = value;
-          });
+          // setState(() {
+          //   selectedIndex = value;
+          // });
           // context.router.push(YekSalaiRoute(yekIndex: selectedIndex));
-          print(selectedIndex.toString());
+          // print(selectedIndex.toString());
         },
         itemExtent: 120,
         diameterRatio: 2.4,
@@ -46,30 +46,33 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
         physics: const BouncingScrollPhysics(),
         squeeze: 1,
         perspective: 0.002, clipBehavior: Clip.antiAlias,
-        children: itemColorMap.keys.map((item) {
-          final color = itemColorMap[item];
+        children: dataMap.map((e) {
           return GestureDetector(
             onTap: () {
-              int index = itemColorMap.keys.toList().indexOf(item);
+              int index = dataMap.indexOf(e);
 
-              context.router
-                  .push(YekSalaiRoute(yekIndex: index, yekColor: color!));
+              context.router.push(
+                  YekSalaiRoute(yekPageIndex: index, yekColor: e["color"]));
             },
             child: Container(
               height: screenHeight / 4,
               width: screenWidth,
               decoration: BoxDecoration(
-                  color: color, borderRadius: BorderRadius.circular(12)),
+                  color: e["color"], borderRadius: BorderRadius.circular(12)),
               child: Center(
                 child: Text(
-                  item,
+                  e['Yek'],
                   textAlign: TextAlign.center,
-                  style: _buttonTextStyle(item),
+                  style: _buttonTextStyle(e['Yek']),
                 ),
               ),
             ),
           );
         }).toList(),
+
+        // itemColorMap.keys.map((item) {
+        //   final color = itemColorMap[item];
+        // }).toList(),
       ),
     );
   }
