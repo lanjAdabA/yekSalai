@@ -66,7 +66,7 @@ List<Map<String, dynamic>> dataMap = [
       },
       {"name": "Lei", "itemname": "Leishang", "asset": "assets/images/Leishang.jpeg"},
       {"name": "Hei", "itemname": "Heibong", "asset": "assets/images/heibong.jpg"},
-      {"name": "Nga", "itemname": "Sareng Amuba", "asset": "assets/images/sarengAmuba.jpg"},
+      {"name": "Nga", "itemname": "Sareng Amuba", "asset": "assets/images/sarengAmuba.png"},
       {
         "name": "Thang",
         "itemname": "Tonkak Thang",
@@ -145,8 +145,8 @@ List<Map<String, dynamic>> dataMap = [
         "asset": "assets/images/green.png"
       },
       {"name": "Lei", "itemname": "Leishang", "asset": "assets/images/Leishang.jpeg"},
-      {"name": "Hei", "itemname": "Hei Manam Naiba", "asset": "assets/images/manamNaiba.png "},
-      {"name": "Nga", "itemname": "Sareng Sangna Langba", "asset": "assets/images/noData.jpg"},
+      {"name": "Hei", "itemname": "Hei Manam Naiba", "asset": "assets/images/manamNaiba.png"},
+      {"name": "Nga", "itemname": "Sareng Sangna Langba", "asset": "assets/images/sarengArangba.png"},
       {
         "name": "Thang",
         "itemname": "Khunthong Thang",
