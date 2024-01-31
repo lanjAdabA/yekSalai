@@ -1,23 +1,28 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:yeksalai/constant/constant.dart';
+
 import 'package:yeksalai/widgets/carouselSliderBuilder.dart';
 import 'package:yeksalai/widgets/listWheelScrollView.dart';
 
 @RoutePage()
-class DashBoardPage extends StatelessWidget {
+class DashBoardPage extends StatefulWidget {
   const DashBoardPage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<DashBoardPage> createState() => _DashBoardPageState();
+}
+
+class _DashBoardPageState extends State<DashBoardPage> {
+  var currentIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
+    // double displayWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 201, 176, 245),
-        title: const Text("Yek Salai"),
-      ),
-      drawer: const Drawer(),
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(

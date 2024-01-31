@@ -8,7 +8,7 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           path: '/',
-          page: DashBoardRoute.page,
+          page: CustomNavigationHomeRoute.page,
           children: const [
             // AutoRoute(path: 'yekSalai', page: YekSalaiRoute.page),
             // AutoRoute(path: 'posts', page: PostsRoute.page),
