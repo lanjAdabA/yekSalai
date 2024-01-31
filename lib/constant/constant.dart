@@ -19,7 +19,7 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Nga",
         "itemname": "Sareng Angangba",
-        "asset": "assets/images/sarengAngangba.PNG"
+        "asset": "assets/images/sarengAngangba.jpg"
       },
       {
         "name": "Thang",
@@ -29,9 +29,9 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Shing",
         "itemname": "Sayee",
-        "asset": "assets/images/redLotus.jpg"
+        "asset": "assets/images/noData.jpg"
       },
-      {"name": "Ta", "itemname": "NA", "asset": "assets/images/redLotus.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
   {
@@ -43,16 +43,16 @@ List<Map<String, dynamic>> dataMap = [
         "itemname": "White",
         "asset": "assets/images/white.png"
       },
-      {"name": "Lei", "itemname": "Melei", "asset": ""},
-      {"name": "Hei", "itemname": "Pineapple", "asset": ""},
-      {"name": "Nga", "itemname": "Sareng Angouba", "asset": ""},
+      {"name": "Lei", "itemname": "Melei", "asset": "assets/images/melei.png"},
+      {"name": "Hei", "itemname": "Pineapple", "asset": "assets/images/pineapple.jpg"},
+      {"name": "Nga", "itemname": "Sareng Angouba", "asset": "assets/images/sarengAngouba.png"},
       {
         "name": "Thang",
         "itemname": "Tondum Thang",
         "asset": "assets/images/thangLuwang.jpg"
       },
-      {"name": "Shing", "itemname": "Heikru", "asset": ""},
-      {"name": "Ta", "itemname": "NA", "asset": ""},
+      {"name": "Shing", "itemname": "Heikru", "asset": "assets/images/noData.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
   {
@@ -64,16 +64,16 @@ List<Map<String, dynamic>> dataMap = [
         "itemname": "Black",
         "asset": "assets/images/black.png"
       },
-      {"name": "Lei", "itemname": "Leishang", "asset": ""},
-      {"name": "Hei", "itemname": "Heibong", "asset": ""},
-      {"name": "Nga", "itemname": "Sareng Amuba", "asset": ""},
+      {"name": "Lei", "itemname": "Leishang", "asset": "assets/images/Leishang.jpeg"},
+      {"name": "Hei", "itemname": "Heibong", "asset": "assets/images/heibong.jpg"},
+      {"name": "Nga", "itemname": "Sareng Amuba", "asset": "assets/images/sarengAmuba.png"},
       {
         "name": "Thang",
         "itemname": "Tonkak Thang",
         "asset": "assets/images/thangKhuman.jpg"
       },
-      {"name": "Shing", "itemname": "Chakhong", "asset": ""},
-      {"name": "Ta", "itemname": "NA", "asset": ""},
+      {"name": "Shing", "itemname": "Chakhong", "asset": "assets/images/noData.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
   {
@@ -85,16 +85,16 @@ List<Map<String, dynamic>> dataMap = [
         "itemname": "Yellow",
         "asset": "assets/images/yellow.png"
       },
-      {"name": "Lei", "itemname": "Tharo Angouba", "asset": ""},
-      {"name": "Hei", "itemname": "Heibong", "asset": ""},
-      {"name": "Nga", "itemname": "Sareng Angouba", "asset": ""},
+      {"name": "Lei", "itemname": "Tharo Angouba", "asset": "assets/images/tharoAngouba.png"},
+      {"name": "Hei", "itemname": "Heibong", "asset": "assets/images/heibong.jpg"},
+      {"name": "Nga", "itemname": "Sareng Angouba", "asset": "assets/images/sarengAngouba.png"},
       {
         "name": "Thang",
         "itemname": "Pukak Thang",
         "asset": "assets/images/thangAngom.jpg"
       },
-      {"name": "Shing", "itemname": "NA", "asset": ""},
-      {"name": "Ta", "itemname": "NA", "asset": ""},
+      {"name": "Shing", "itemname": "NA", "asset": "assets/images/noData.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
   {
@@ -106,16 +106,16 @@ List<Map<String, dynamic>> dataMap = [
         "itemname": "Brown",
         "asset": "assets/images/brown.png"
       },
-      {"name": "Lei", "itemname": "Yerum Lei", "asset": ""},
-      {"name": "Hei", "itemname": "Heitup", "asset": ""},
-      {"name": "Nga", "itemname": "Sareng Napu", "asset": ""},
+      {"name": "Lei", "itemname": "Yerum Lei", "asset": "assets/images/yerumlei.png"},
+      {"name": "Hei", "itemname": "Heitup", "asset": "assets/images/heitup.png"},
+      {"name": "Nga", "itemname": "Sareng Napu", "asset": "assets/images/sarengNapu.png"},
       {
         "name": "Thang",
         "itemname": "Yentok Saba Thang",
         "asset": "assets/images/thangMoirang.jpg"
       },
-      {"name": "Shing", "itemname": "NA", "asset": ""},
-      {"name": "Ta", "itemname": "NA", "asset": ""},
+      {"name": "Shing", "itemname": "NA", "asset": "assets/images/noData.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
   {
@@ -123,16 +123,16 @@ List<Map<String, dynamic>> dataMap = [
     "color": Colors.teal,
     "YekInfo": [
       {"name": "Machu", "itemname": "Blue", "asset": "assets/images/teal.png"},
-      {"name": "Lei", "itemname": "Leishang", "asset": ""},
-      {"name": "Hei", "itemname": "Heiba", "asset": ""},
+      {"name": "Lei", "itemname": "Leishang", "asset": "assets/images/Leishang.jpeg"},
+      {"name": "Hei", "itemname": "Heiba", "asset": "assets/images/noData.jpg"},
       {
         "name": "Nga",
         "itemname": "Sareng Ngangna Langba",
-        "asset": "assets/images/thangKhanganba.jpg"
+        "asset": "assets/images/sarengAngangba.jpg"
       },
-      {"name": "Thang", "itemname": "Chinaiba Thang", "asset": ""},
-      {"name": "Shing", "itemname": "NA", "asset": ""},
-      {"name": "Ta", "itemname": "NA", "asset": ""},
+      {"name": "Thang", "itemname": "Chinaiba Thang", "asset": "assets/images/thangKhanganba.jpg"},
+      {"name": "Shing", "itemname": "NA", "asset": "assets/images/noData.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
   {
@@ -144,16 +144,16 @@ List<Map<String, dynamic>> dataMap = [
         "itemname": "Green",
         "asset": "assets/images/green.png"
       },
-      {"name": "Lei", "itemname": "Leishang", "asset": ""},
-      {"name": "Hei", "itemname": "Hei Manam Naiba", "asset": ""},
-      {"name": "Nga", "itemname": "Sareng Sangna Langba", "asset": ""},
+      {"name": "Lei", "itemname": "Leishang", "asset": "assets/images/Leishang.jpeg"},
+      {"name": "Hei", "itemname": "Hei Manam Naiba", "asset": "assets/images/manamNaiba.png"},
+      {"name": "Nga", "itemname": "Sareng Sangna Langba", "asset": "assets/images/sarengArangba.png"},
       {
         "name": "Thang",
         "itemname": "Khunthong Thang",
         "asset": "assets/images/thangSarangLeishangthem.jpg"
       },
-      {"name": "Shing", "itemname": "NA", "asset": ""},
-      {"name": "Ta", "itemname": "NA", "asset": ""},
+      {"name": "Shing", "itemname": "NA", "asset": "assets/images/noData.jpg"},
+      {"name": "Ta", "itemname": "NA", "asset": "assets/images/noData.jpg"},
     ]
   },
 ];
