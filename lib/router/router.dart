@@ -15,6 +15,9 @@ class AppRouter extends $AppRouter {
             // AutoRoute(path: 'settings', page: SettingsRoute.page),
           ],
         ),
-        AutoRoute(path: '/yekSalai', page: YekSalaiRoute.page)
+        AutoRoute(
+          path: '/yekSalai',
+          page: YekSalaiRoute.page,
+        ),
       ];
 }

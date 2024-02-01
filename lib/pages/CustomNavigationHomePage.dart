@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yeksalai/pages/dashboard.page.dart';
 import 'package:yeksalai/pages/searchAndCompare.page.dart';
+import 'package:yeksalai/widgets/onBackButtonPressedPopUp.dart';
 
 @RoutePage()
 class CustomNavigationHomePage extends StatefulWidget {
@@ -71,27 +72,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
     bool exitApp = await showDialog(
         context: context,
         builder: ((context) {
-          return AlertDialog(
-            buttonPadding: const EdgeInsets.all(20),
-            title: const Text("Are you sure you want to exit?"),
-            actions: <Widget>[
-              ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.blue[100]),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text("Cancel"),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: const Text("Ok"),
-              ),
-            ],
-          );
+          return const OnButtonPressedPopUp();
         }));
 
     return exitApp;
