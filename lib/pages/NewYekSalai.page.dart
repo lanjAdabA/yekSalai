@@ -15,13 +15,13 @@ class NewYekSalaiPage extends StatelessWidget {
         height: scHeight,
         width: scHeight,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-              scale: 1,
-              fit: BoxFit.cover,
-              // alignment: Alignment(0, -.9),
-              image: AssetImage(
-                "assets/images/BG/YellowBG.jpeg",
-              )),
+          // image: DecorationImage(
+          //     scale: 1,
+          //     fit: BoxFit.cover,
+          //     // alignment: Alignment(0, -.9),
+          //     image: AssetImage(
+          //       "assets/images/BG/YellowBG.jpeg",
+          //     )),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomLeft,
@@ -34,13 +34,14 @@ class NewYekSalaiPage extends StatelessWidget {
           ),
         ),
         child: Stack(
+          fit: StackFit.expand,
           alignment: Alignment.center,
-          clipBehavior: Clip.none,
           children: [
             Image.asset(
-              "assets/images/splash/yellow.png",
-              fit: BoxFit.contain,
+              "assets/images/BG/redBG.jpg",
+              fit: BoxFit.fill,
             ),
+            Image.asset("assets/images/splash/yellow.png", fit: BoxFit.contain),
             Image.asset(
               "assets/images/char/char2.png",
               fit: BoxFit.contain,
