@@ -8,8 +8,8 @@ import 'package:yeksalai/widgets/listWheelScrollView.dart';
 @RoutePage()
 class DashBoardPage extends StatefulWidget {
   const DashBoardPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<DashBoardPage> createState() => _DashBoardPageState();

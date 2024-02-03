@@ -4,7 +4,7 @@ import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/router/router.gr.dart';
 
 class ListWheelScroll extends StatefulWidget {
-  const ListWheelScroll({Key? key}) : super(key: key);
+  const ListWheelScroll({super.key});
 
   @override
   _ListWheelScrollState createState() => _ListWheelScrollState();
@@ -52,7 +52,10 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
               int index = dataMap.indexOf(e);
 
               context.router.push(
-                  YekSalaiRoute(yekPageIndex: index, yekColor: e["color"]));
+                //todo --> navigate to yeksalaiPage
+                // YekSalaiRoute(yekPageIndex: index, yekColor: e["color"]),
+                const NewYekSalaiRoute(),
+              );
             },
             child: Container(
               height: screenHeight / 4,

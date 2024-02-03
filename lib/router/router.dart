@@ -19,5 +19,9 @@ class AppRouter extends $AppRouter {
           path: '/yekSalai',
           page: YekSalaiRoute.page,
         ),
+        AutoRoute(
+          path: '/newyekSalai',
+          page: NewYekSalaiRoute.page,
+        ),
       ];
 }
