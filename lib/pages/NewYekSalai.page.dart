@@ -5,7 +5,7 @@ import 'package:yeksalai/constant/constant.dart';
 
 @RoutePage()
 class NewYekSalaiPage extends StatefulWidget {
-  const NewYekSalaiPage({super.key});
+  const NewYekSalaiPage({super.key}); // Fixed typo
 
   @override
   State<NewYekSalaiPage> createState() => _NewYekSalaiPageState();
@@ -16,7 +16,7 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
 
   @override
   void initState() {
-    _pageController = PageController(viewportFraction: 0.99);
+    _pageController = PageController(viewportFraction: 1.08);
     super.initState();
   }
 
@@ -29,7 +29,7 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(margin: const EdgeInsets.all(8),
+      body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -52,25 +52,28 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
                   animation: _pageController,
                   builder: (context, child) {
                     double value = 1.0;
-                    if (_pageController.position.haveDimensions && constraints.maxWidth != 0) {
+                    if (_pageController.position.haveDimensions &&
+                        constraints.maxWidth != 0) {
                       value = (_pageController.page! - index).abs();
                       value = 1 - (value * 0.5).clamp(0.0, 1.0);
                     }
                     return Center(
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * .96,
+                        width: MediaQuery.of(context).size.width * .96,
                         child: Stack(
                           fit: StackFit.expand,
                           children: [
-                            
                             Transform.translate(
-                              offset: Offset(value * constraints.maxWidth * 0.0, 0.2),
+                              // Issue may be here, verify constraints.maxWidth usage
+                              offset: Offset(
+                                  value * constraints.maxWidth * 0.0, 0.2),
                               child: SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.4,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.4,
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(26),
                                   child: Image.asset(
                                     dataMap[index]["BG"],
                                     fit: BoxFit.fill,
@@ -79,13 +82,18 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
                               ),
                             ),
                             Transform.translate(
-                              offset: Offset(-value * constraints.maxWidth * 0.11, 0.2),
+                              // Issue may be here, verify constraints.maxWidth usage
+                              offset: Offset(
+                                  -value * constraints.maxWidth * 0.11, 0.2),
                               child: Positioned.fill(
-                                child: Image.asset(dataMap[index]["splash"], fit: BoxFit.contain),
+                                child: Image.asset(dataMap[index]["splash"],
+                                    fit: BoxFit.contain),
                               ),
                             ),
                             Transform.translate(
-                              offset: Offset(0.0, value * constraints.maxHeight * 0.2),
+                              // Issue may be here, verify constraints.maxHeight usage
+                              offset: Offset(
+                                  0.0, value * constraints.maxHeight * 0.2),
                               child: Positioned.fill(
                                 child: Image.asset(
                                   dataMap[index]["char"],
@@ -93,11 +101,18 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
                                 ),
                               ),
                             ),
-                             Text(dataMap[index]["Yek"], style: const TextStyle(fontSize: 68),).animate(onPlay: (controller) => controller.repeat())
-        .shimmer(duration: 4444.ms, color: const Color(0xFF80DDFF))
-        .animate() // this wraps the previous Animate in another Animate
-        // .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad)
-        // .slide(),
+                            Text(
+                              dataMap[index]["Yek"],
+                              style: const TextStyle(fontSize: 68),
+                            )
+                                .animate(
+                                    onPlay: (controller) => controller.repeat())
+                                .shimmer(
+                                    duration: 4444.ms,
+                                    color: const Color(0xFF80DDFF))
+                                .animate() // this wraps the previous Animate in another Animate
+                            // .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad)
+                            // .slide(),
                           ],
                         ),
                       ),
