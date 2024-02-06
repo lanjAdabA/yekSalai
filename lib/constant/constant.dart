@@ -116,7 +116,7 @@ List<Map<String, dynamic>> dataMap = [
   {
     "Yek": "Angom",
     "color": Colors.yellow,
-    "BG": "assets/images/BG/YellowBG.jpeg",
+    "BG": "assets/images/BG/yellowBG.jpg",
     "char": "assets/images/char/char4.png",
     "splash": "assets/images/splash/yellow.png",
     "YekInfo": [
