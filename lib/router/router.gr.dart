@@ -35,9 +35,14 @@ abstract class $AppRouter extends _i5.RootStackRouter {
       );
     },
     NewYekSalaiRoute.name: (routeData) {
+      final args = routeData.argsAs<NewYekSalaiRouteArgs>();
       return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.NewYekSalaiPage(),
+        child: _i3.NewYekSalaiPage(
+          key: args.key,
+          yekPageIndex: args.yekPageIndex,
+          yekColor: args.yekColor,
+        ),
       );
     },
     YekSalaiRoute.name: (routeData) {
@@ -84,16 +89,45 @@ class DashBoardRoute extends _i5.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.NewYekSalaiPage]
-class NewYekSalaiRoute extends _i5.PageRouteInfo<void> {
-  const NewYekSalaiRoute({List<_i5.PageRouteInfo>? children})
-      : super(
+class NewYekSalaiRoute extends _i5.PageRouteInfo<NewYekSalaiRouteArgs> {
+  NewYekSalaiRoute({
+    _i6.Key? key,
+    required int yekPageIndex,
+    required _i7.Color yekColor,
+    List<_i5.PageRouteInfo>? children,
+  }) : super(
           NewYekSalaiRoute.name,
+          args: NewYekSalaiRouteArgs(
+            key: key,
+            yekPageIndex: yekPageIndex,
+            yekColor: yekColor,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NewYekSalaiRoute';
 
-  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+  static const _i5.PageInfo<NewYekSalaiRouteArgs> page =
+      _i5.PageInfo<NewYekSalaiRouteArgs>(name);
+}
+
+class NewYekSalaiRouteArgs {
+  const NewYekSalaiRouteArgs({
+    this.key,
+    required this.yekPageIndex,
+    required this.yekColor,
+  });
+
+  final _i6.Key? key;
+
+  final int yekPageIndex;
+
+  final _i7.Color yekColor;
+
+  @override
+  String toString() {
+    return 'NewYekSalaiRouteArgs{key: $key, yekPageIndex: $yekPageIndex, yekColor: $yekColor}';
+  }
 }
 
 /// generated route for

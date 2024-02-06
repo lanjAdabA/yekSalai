@@ -54,7 +54,7 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
               context.router.push(
                 //todo --> navigate to yeksalaiPage
                 // YekSalaiRoute(yekPageIndex: index, yekColor: e["color"]),
-                const NewYekSalaiRoute(),
+                NewYekSalaiRoute(yekPageIndex: index, yekColor: e["color"]),
               );
             },
             child: Container(

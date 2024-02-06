@@ -5,23 +5,44 @@ import 'package:yeksalai/constant/constant.dart';
 
 @RoutePage()
 class NewYekSalaiPage extends StatefulWidget {
-  const NewYekSalaiPage({super.key});
+  final int yekPageIndex;
+  final Color yekColor;
+  const NewYekSalaiPage(
+      {super.key, required this.yekPageIndex, required this.yekColor});
 
   @override
   State<NewYekSalaiPage> createState() => _NewYekSalaiPageState();
 }
 
-class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
+class _NewYekSalaiPageState extends State<NewYekSalaiPage>
+    with SingleTickerProviderStateMixin {
   late PageController _pageController;
+  late Animation<double> _fadeAnimation;
+  late AnimationController _fadeController;
 
   @override
   void initState() {
-    _pageController = PageController(viewportFraction: 1);
+    _pageController = PageController(
+      viewportFraction: 1,
+      initialPage: widget.yekPageIndex,
+    );
+
+    _fadeController = AnimationController(
+      vsync: this,
+      duration:
+          const Duration(milliseconds: 222), // Adjust the duration as needed
+    );
+    _fadeAnimation = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(_fadeController);
+
     super.initState();
   }
 
   @override
   void dispose() {
+    _fadeController.dispose();
     _pageController.dispose();
     super.dispose();
   }
@@ -87,15 +108,22 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage> {
                               ),
                             ),
                             Transform.translate(
+                              filterQuality: FilterQuality.high,
                               offset: Offset(
-                                  -value *
-                                      MediaQuery.of(context).size.height *
-                                      .01,
-                                  value *
-                                      MediaQuery.of(context).size.height *
-                                      0.06),
-                              child: Image.asset(dataMap[index]["splash"]!,
-                                  fit: BoxFit.contain),
+                                -value *
+                                    MediaQuery.of(context).size.height *
+                                    0.01,
+                                value *
+                                    MediaQuery.of(context).size.height *
+                                    0.15,
+                              ),
+                              child: FadeTransition(
+                                opacity: _fadeAnimation,
+                                child: Image.asset(
+                                  dataMap[index]["splash"]!,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
                             Transform.translate(
                               offset: Offset(
