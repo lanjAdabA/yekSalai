@@ -1,6 +1,10 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:yeksalai/constant/constant.dart';
+import 'package:yeksalai/pages/searchAndCompare.page.dart';
+import 'package:yeksalai/router/router.gr.dart';
 
 import 'package:yeksalai/widgets/carouselSliderBuilder.dart';
 import 'package:yeksalai/widgets/listWheelScrollView.dart';

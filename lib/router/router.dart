@@ -23,5 +23,9 @@ class AppRouter extends $AppRouter {
           path: '/newyekSalai',
           page: NewYekSalaiRoute.page,
         ),
+        AutoRoute(
+          path: '/searchNcompare',
+          page: SearchAndCompareRoute.page,
+        ),
       ];
 }
