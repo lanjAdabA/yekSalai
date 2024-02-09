@@ -27,5 +27,9 @@ class AppRouter extends $AppRouter {
           path: '/searchNcompare',
           page: SearchAndCompareRoute.page,
         ),
+        AutoRoute(
+          path: '/contactUs',
+          page: ContactRoute.page,
+        ),
       ];
 }

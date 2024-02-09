@@ -1,11 +1,14 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:yeksalai/pages/dashboard.page.dart';
 import 'package:yeksalai/pages/searchAndCompare.page.dart';
+import 'package:yeksalai/router/router.gr.dart';
 import 'package:yeksalai/widgets/onBackButtonPressedPopUp.dart';
 
+//! / landing page
 @RoutePage()
 class CustomNavigationHomePage extends StatefulWidget {
   const CustomNavigationHomePage({super.key});
@@ -89,8 +92,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
                           ),
                           ListTile(
                             onTap: () {
-                              // Navigator.pushNamed(
-                              //     context, GraphScreen.routename);
+                              context.router.push(const ContactRoute());
                             },
                             leading: const Icon(Icons.inbox),
                             title: const Text('contact us'),

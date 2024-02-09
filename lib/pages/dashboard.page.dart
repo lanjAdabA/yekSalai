@@ -8,6 +8,7 @@ import 'package:yeksalai/router/router.gr.dart';
 
 import 'package:yeksalai/widgets/carouselSliderBuilder.dart';
 import 'package:yeksalai/widgets/listWheelScrollView.dart';
+//! / landing page / DashBoardPage
 
 @RoutePage()
 class DashBoardPage extends StatefulWidget {

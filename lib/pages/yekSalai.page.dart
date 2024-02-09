@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/router/router.gr.dart';
 import 'package:yeksalai/widgets/yekChartWidget.dart';
+//! page not used as of now
+//! / landing page / DashBoardPage/ ListWheelScroll / YekSalaiPage
 
 @RoutePage()
 class YekSalaiPage extends StatefulWidget {

@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:yeksalai/constant/constant.dart';
+//! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage
 
 @RoutePage()
 class NewYekSalaiPage extends StatefulWidget {
