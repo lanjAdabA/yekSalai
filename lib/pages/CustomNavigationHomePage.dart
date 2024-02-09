@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
-// import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:yeksalai/pages/dashboard.page.dart';
 import 'package:yeksalai/pages/searchAndCompare.page.dart';
 import 'package:yeksalai/widgets/onBackButtonPressedPopUp.dart';
@@ -38,41 +37,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
     // ignore: deprecated_member_use
     return WillPopScope(
         onWillPop: () => _onBackButtonPressed(context),
-        child:
-            // Scaffold(
-            //   appBar: AppBar(
-            //     backgroundColor: const Color.fromARGB(255, 201, 176, 245),
-            //     title: const Text("Yek Salai"),
-            //   ),
-            //   drawer: const Drawer(),
-            //   body: chartPage[selectedIndex],
-            //   bottomNavigationBar: BottomNavigationBar(
-            //       // backgroundColor: const Color.fromARGB(0, 48, 48, 50),
-            //       //
-            //       selectedItemColor: const Color.fromARGB(255, 162, 16, 206),
-            //       unselectedItemColor: const Color.fromARGB(255, 158, 160, 155),
-            //       currentIndex: selectedIndex,
-            //       selectedFontSize: 18,
-            //       showSelectedLabels: true,
-            //       showUnselectedLabels: true,
-            //       unselectedFontSize: 10,
-            //       enableFeedback: true,
-            //       onTap: navigationBottomBar,
-            //       items: [
-            //         BottomNavigationBarItem(
-            //             icon: SizedBox(
-            //                 height: MediaQuery.of(context).size.height * .026,
-            //                 child: const Icon(Icons.search)),
-            //             label: "Search"),
-            //         BottomNavigationBarItem(
-            //             icon: SizedBox(
-            //                 height: MediaQuery.of(context).size.height * .026,
-            //                 child: const Icon(Icons.dashboard)),
-            //             label: "DASHBOARD"),
-            //       ]),
-            // ),
-
-            AdvancedDrawer(
+        child: AdvancedDrawer(
           controller: _advancedController,
           backdrop: Container(
             width: double.infinity,
@@ -128,7 +93,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
                               //     context, GraphScreen.routename);
                             },
                             leading: const Icon(Icons.inbox),
-                            title: const Text('Settings'),
+                            title: const Text('contact us'),
                           ),
                           ListTile(
                             onTap: () {
@@ -136,7 +101,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
                               // context, TableScreen.routename);
                             },
                             leading: const Icon(Icons.info),
-                            title: const Text('Settings'),
+                            title: const Text('about'),
                           ),
                           ListTile(
                             onTap: () {
@@ -144,7 +109,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
                               // context, MobileSettings.routename);
                             },
                             leading: const Icon(Icons.settings),
-                            title: const Text('Settings'),
+                            title: const Text('setting'),
                           ),
                           const Spacer(),
                         ],
@@ -158,15 +123,29 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
           child: Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                  onPressed: () {
-                    _advancedController.showDrawer();
+                onPressed: () {
+                  _advancedController.showDrawer();
+                },
+                icon: ValueListenableBuilder<AdvancedDrawerValue>(
+                  valueListenable: _advancedController,
+                  builder: (_, value, __) {
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 05),
+                      child: Icon(
+                        value.visible ? Icons.clear : Icons.menu,
+                        key: ValueKey<bool>(value.visible),
+                      ),
+                    );
                   },
-                  icon: const Icon(Icons.menu)),
+                ),
+                // icon: const Icon(Icons.menu),
+              ),
               backgroundColor: const Color.fromARGB(255, 201, 176, 245),
               title: const Text("Yek Salai"),
             ),
             body: chartPage[selectedIndex],
             bottomNavigationBar: BottomNavigationBar(
+
                 // backgroundColor: const Color.fromARGB(0, 48, 48, 50),
                 //
                 selectedItemColor: const Color.fromARGB(255, 162, 16, 206),
