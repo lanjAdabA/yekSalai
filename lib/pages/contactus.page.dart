@@ -34,9 +34,10 @@ class _ContactPageState extends State<ContactPage> {
             height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    opacity: 0.2,
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/bg.png'))),
+              opacity: 0.2,
+              fit: BoxFit.cover,
+              image: AssetImage('assets/images/bg.png'),
+            )),
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(

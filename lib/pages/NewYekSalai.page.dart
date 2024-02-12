@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:yeksalai/constant/constant.dart';
+import 'package:yeksalai/router/router.gr.dart';
 //! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage
 
 @RoutePage()
@@ -149,15 +150,25 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage>
                                       //
                                       // ),
                                       ),
-                                  Transform.translate(
-                                    offset: Offset(
-                                        0.0,
-                                        value *
-                                            MediaQuery.of(context).size.height *
-                                            0.09),
-                                    child: Image.asset(
-                                      dataMap[index]["char"]!,
-                                      fit: BoxFit.contain,
+                                  GestureDetector(
+                                    onTap: () {
+                                      context.router.push(
+                                        DetailedYekDescriptionRoute(
+                                            yekPageIndex: index),
+                                      );
+                                    },
+                                    child: Transform.translate(
+                                      offset: Offset(
+                                          0.0,
+                                          value *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.09),
+                                      child: Image.asset(
+                                        dataMap[index]["char"]!,
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
                                   ),
                                   Text(
