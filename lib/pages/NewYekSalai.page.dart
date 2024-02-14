@@ -30,6 +30,30 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage>
   final GlobalKey _globalKey = GlobalKey();
   int selectedIndex = 0;
 
+  Future<void> _navigateAndDisplaySelection(
+      BuildContext context, int index) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await context.router
+        .push(DetailedYekDescriptionRoute(yekPageIndex: index));
+
+    log(result.toString());
+
+    // When a BuildContext is used from a StatefulWidget, the mounted property
+    // must be checked after an asynchronous gap.
+    if (!mounted) return;
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    if (result != null) {
+      _pageController.jumpToPage(int.parse(result.toString()));
+    }
+
+    // ScaffoldMessenger.of(context)
+    //   ..removeCurrentSnackBar()
+    //   ..showSnackBar(SnackBar(content: Text('$result')));
+  }
+
   @override
   void initState() {
     _pageController = PageController(
@@ -98,89 +122,96 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage>
                         value = 1 - (value * 0.5).clamp(0.0, 1.0);
                       }
 
-                      return SwipeDetector(
-                        onSwipeUp: (offset) {
-                          context.router.push(
-                              DetailedYekDescriptionRoute(yekPageIndex: index));
-                        },
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Positioned(
-                              child: BgStack(
-                                imagePath: dataMap[index]
-                                    ["BG"], // Replace with your image path
-                                isSelected: selectedIndex == index,
-                              ),
-                            ),
-                            Transform.translate(
-                                filterQuality: FilterQuality.high,
-                                offset: Offset(
-                                  -value *
-                                      MediaQuery.of(context).size.height *
-                                      0.01,
-                                  value *
-                                      MediaQuery.of(context).size.height *
-                                      0.15,
+                      return GestureDetector(
+                        child: SwipeDetector(
+                          onSwipeUp: (offset) {
+                            _navigateAndDisplaySelection(context, index);
+                            // context.router.push(
+                            //   DetailedYekDescriptionRoute(
+                            //     yekPageIndex: index)
+
+                            //     );
+                          },
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Positioned(
+                                child: BgStack(
+                                  imagePath: dataMap[index]
+                                      ["BG"], // Replace with your image path
+                                  isSelected: selectedIndex == index,
                                 ),
-                                child: FadeTransition(
-                                  opacity: _fadeAnimation,
-                                  child: Hero(
-                                    tag: "splash",
-                                    child: Image.asset(
-                                      dataMap[index]["splash"]!,
-                                      fit: BoxFit.contain,
-                                    ),
+                              ),
+                              Transform.translate(
+                                  filterQuality: FilterQuality.high,
+                                  offset: Offset(
+                                    -value *
+                                        MediaQuery.of(context).size.height *
+                                        0.01,
+                                    value *
+                                        MediaQuery.of(context).size.height *
+                                        0.15,
                                   ),
-                                )
-                                    .animate()
-                                    // .effect(
-                                    //       begin: .5,
-                                    //       curve: Curves.decelerate,
-                                    //     )
-                                    // !-->
-                                    .fade(
-                                        duration:
-                                            const Duration(milliseconds: 1999))
-                                //!->>
-                                // .shader()
-                                // .rotate(
-                                //     duration:
-                                //         const Duration(milliseconds: 8888))
+                                  child: FadeTransition(
+                                    opacity: _fadeAnimation,
+                                    child: Hero(
+                                      tag: "splash$index",
+                                      child: Image.asset(
+                                        dataMap[index]["splash"]!,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  )
+                                      .animate()
+                                      // .effect(
+                                      //       begin: .5,
+                                      //       curve: Curves.decelerate,
+                                      //     )
+                                      // !-->
+                                      .fade(
+                                          duration: const Duration(
+                                              milliseconds: 1999))
+                                  //!->>
+                                  // .shader()
+                                  // .rotate(
+                                  //     duration:
+                                  //         const Duration(milliseconds: 8888))
 
-                                // .shimmer()
-                                // .blurY(curve: Curves.decelerate
-                                //
-                                // ),
+                                  // .shimmer()
+                                  // .blurY(curve: Curves.decelerate
+                                  //
+                                  // ),
 
-                                ),
-                            Transform.translate(
-                              offset: Offset(
-                                  0.0,
-                                  value *
-                                      MediaQuery.of(context).size.height *
-                                      0.09),
-                              child: Hero(
-                                tag: "char",
-                                child: Image.asset(
-                                  dataMap[index]["char"]!,
-                                  fit: BoxFit.contain,
+                                  ),
+                              Transform.translate(
+                                offset: Offset(
+                                    0.0,
+                                    value *
+                                        MediaQuery.of(context).size.height *
+                                        0.09),
+                                child: Hero(
+                                  tag: "char$index",
+                                  child: Image.asset(
+                                    dataMap[index]["char"]!,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              dataMap[index]["Yek"]!,
-                              style: const TextStyle(
-                                  fontSize: 68, color: Colors.white),
-                            )
-                                .animate(
-                                  onPlay: (controller) => controller.repeat(),
-                                )
-                                .shimmer(
-                                  duration: const Duration(milliseconds: 4444),
-                                  color: Colors.amber,
-                                ),
-                          ],
+                              Text(
+                                dataMap[index]["Yek"]!,
+                                style: const TextStyle(
+                                    fontSize: 68, color: Colors.white),
+                              )
+                                  .animate(
+                                    onPlay: (controller) => controller.repeat(),
+                                  )
+                                  .shimmer(
+                                    duration:
+                                        const Duration(milliseconds: 4444),
+                                    color: Colors.amber,
+                                  ),
+                            ],
+                          ),
                         ),
                       );
                     },

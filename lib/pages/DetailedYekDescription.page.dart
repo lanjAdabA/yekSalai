@@ -23,6 +23,7 @@ class DetailedYekDescriptionPage extends StatefulWidget {
 
 class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
     with SingleTickerProviderStateMixin {
+  int newIndex = 0;
   late PageController _pageController;
   late Animation<double> _fadeAnimation;
 
@@ -39,8 +40,7 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
 
     _fadeController = AnimationController(
       vsync: this,
-      duration:
-          const Duration(milliseconds: 222), // Adjust the duration as needed
+      duration: const Duration(milliseconds: 222),
     );
     _fadeAnimation = Tween<double>(
       begin: 1,
@@ -64,7 +64,9 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
       return SwipeDetector(
         onSwipeDown: (offset) {
-          context.router.pop();
+          // context.router.pop();
+
+          Navigator.pop(context, newIndex);
         },
         child: Container(
           decoration: const BoxDecoration(
@@ -90,100 +92,94 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
                   children: [
                     Container(
                       padding: const EdgeInsets.only(left: 26, top: 26),
-                      height: scheight / 2,
-                      width: scwidth / 2,
+                      height: scheight / 2.6,
+                      width: scwidth,
                       child: AnimatedBuilder(
                         animation: _pageController,
                         builder: (context, child) {
                           double value = 1.0;
 
-                          // double offset = _pageController.hasClients
-                          //     ? _pageController.offset
-                          //     : 0;
                           if (_pageController.position.haveDimensions &&
                               constraints.maxWidth != 0) {
                             value = (_pageController.page! - index).abs();
                             value = 1 - (value * 0.5).clamp(0.0, 1.0);
                           }
 
-                          return Stack(
-                            fit: StackFit.expand,
+                          newIndex = index;
+
+                          return Row(
                             children: [
-                              BgStack(
-                                imagePath: dataMap[index]
-                                    ["BG"], // Replace with your image path
-                                isSelected: selectedIndex == index,
-                              ),
-                              Transform.translate(
-                                  filterQuality: FilterQuality.high,
-                                  offset: Offset(
-                                    -value *
-                                        MediaQuery.of(context).size.height *
-                                        0.01,
-                                    value *
-                                        MediaQuery.of(context).size.height *
-                                        0.15,
-                                  ),
-                                  child: Hero(
-                                    tag: "splash",
-                                    child: Image.asset(
-                                      dataMap[index]["splash"]!,
-                                      fit: BoxFit.contain,
+                              Expanded(
+                                flex: 1,
+                                child: Stack(
+                                  fit: StackFit.loose,
+                                  children: [
+                                    BgStack(
+                                      imagePath: dataMap[index]["BG"],
+                                      isSelected:
+                                          selectedIndex == widget.yekPageIndex,
                                     ),
-                                  )
-                                  // .animate()
-                                  // // .effect(
-                                  // //       begin: .5,
-                                  // //       curve: Curves.decelerate,
-                                  // //     )
-                                  // // !-->
-                                  // .fade(
-                                  //     duration: const Duration(
-                                  //         milliseconds: 1999))
-                                  //!->>
-                                  // .shader()
-                                  // .rotate(
-                                  //     duration:
-                                  //         const Duration(milliseconds: 8888))
-
-                                  // .shimmer()
-                                  // .blurY(curve: Curves.decelerate
-                                  //
-                                  // ),
-
-                                  ),
-                              Transform.translate(
-                                offset: Offset(
-                                    0.0,
-                                    value *
-                                        MediaQuery.of(context).size.height *
-                                        0.09),
-                                child: Hero(
-                                  tag: "char",
-                                  child: Image.asset(
-                                    dataMap[index]["char"]!,
-                                    fit: BoxFit.contain,
-                                  ),
+                                    Transform.translate(
+                                        filterQuality: FilterQuality.high,
+                                        offset: Offset(
+                                          -value *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.01,
+                                          value *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                        ),
+                                        child: Hero(
+                                          tag: "splash$index",
+                                          child: Image.asset(
+                                            dataMap[index]["splash"]!,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        )),
+                                    Transform.translate(
+                                      offset: Offset(
+                                          0.0,
+                                          value *
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.09),
+                                      child: Hero(
+                                        tag: "char$index",
+                                        child: Image.asset(
+                                          dataMap[index]["char"]!,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  dataMap[index]["Yek"]!,
-                                  style: TextStyle(
-                                      fontSize: scwidth / 14,
-                                      color: Colors.white),
-                                )
-                                    .animate(
-                                      onPlay: (controller) =>
-                                          controller.repeat(),
-                                    )
-                                    .shimmer(
-                                      duration:
-                                          const Duration(milliseconds: 4444),
-                                      color: Colors.amber,
-                                    ),
-                              ),
+                              Expanded(
+                                  child: Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    dataMap[index]["Yek"]!,
+                                    style: TextStyle(
+                                        fontSize: scwidth / 14,
+                                        color: Colors.white),
+                                  )
+                                      .animate(
+                                        onPlay: (controller) =>
+                                            controller.repeat(),
+                                      )
+                                      .shimmer(
+                                        duration:
+                                            const Duration(milliseconds: 4444),
+                                        color: Colors.amber,
+                                      ),
+                                ),
+                              ))
                             ],
                           );
                         },
