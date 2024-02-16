@@ -1,14 +1,15 @@
 //! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage / DetailedYekDescriptionPage
 
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:yeksalai/constant/constant.dart';
-import 'package:yeksalai/router/router.gr.dart';
+// import 'package:yeksalai/constant/constant.dart';
+import 'package:yeksalai/widgets/topWidgetDetailedYekDes.dart';
+import 'package:yeksalai/widgets/yekChartWidget.dart';
 
 @RoutePage()
 class DetailedYekDescriptionPage extends StatefulWidget {
@@ -30,6 +31,7 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
   late AnimationController _fadeController;
 
   int selectedIndex = 0;
+  List yekinfo = [];
 
   @override
   void initState() {
@@ -37,6 +39,7 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
       viewportFraction: 1,
       initialPage: widget.yekPageIndex,
     );
+    yekinfo = dataMap[widget.yekPageIndex]['YekInfo'];
 
     _fadeController = AnimationController(
       vsync: this,
@@ -61,14 +64,18 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
   Widget build(BuildContext context) {
     double scheight = MediaQuery.of(context).size.height;
     double scwidth = MediaQuery.of(context).size.width;
-    return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
-      return SwipeDetector(
-        onSwipeDown: (offset) {
-          // context.router.pop();
+    return Scaffold(
+        body: SingleChildScrollView(
+            child:
+                //  LayoutBuilder(builder: (context, constraints) {
+                //   return
+                SwipeDetector(
+      onSwipeDown: (offset) {
+        context.router.pop();
 
-          Navigator.pop(context, newIndex);
-        },
-        child: Container(
+        // Navigator.pop(context, newIndex);
+      },
+      child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -81,119 +88,81 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
               ],
             ),
           ),
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: dataMap.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 26, top: 26),
-                      height: scheight / 2.6,
-                      width: scwidth,
-                      child: AnimatedBuilder(
-                        animation: _pageController,
-                        builder: (context, child) {
-                          double value = 1.0;
+          child:
+              // PageView.builder(
+              //   controller: _pageController,
+              //   itemCount: dataMap.length,
+              //   itemBuilder: (context, index) {
+              //     return
+              Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 26, top: 26),
+                        height: scheight / 2.6,
+                        width: scwidth,
+                        child: AnimatedBuilder(
+                          animation: _pageController,
+                          builder: (context, child) {
+                            double value = 1.0;
 
-                          if (_pageController.position.haveDimensions &&
-                              constraints.maxWidth != 0) {
-                            value = (_pageController.page! - index).abs();
-                            value = 1 - (value * 0.5).clamp(0.0, 1.0);
-                          }
+                            // if (_pageController.position.haveDimensions &&
+                            //     constraints.maxWidth != 0) {
+                            //   value =
+                            //       (_pageController.page! - widget.yekPageIndex)
+                            //           .abs();
+                            //   value = 1 - (value * 0.5).clamp(0.0, 1.0);
+                            // }
 
-                          newIndex = index;
+                            // newIndex = widget.yekPageIndex;
 
-                          return Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Stack(
-                                  fit: StackFit.loose,
-                                  children: [
-                                    BgStack(
-                                      imagePath: dataMap[index]["BG"],
-                                      isSelected:
-                                          selectedIndex == widget.yekPageIndex,
-                                    ),
-                                    Transform.translate(
-                                        filterQuality: FilterQuality.high,
-                                        offset: Offset(
-                                          -value *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.01,
-                                          value *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.15,
-                                        ),
-                                        child: Hero(
-                                          tag: "splash$index",
-                                          child: Image.asset(
-                                            dataMap[index]["splash"]!,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        )),
-                                    Transform.translate(
-                                      offset: Offset(
-                                          0.0,
-                                          value *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.09),
-                                      child: Hero(
-                                        tag: "char$index",
-                                        child: Image.asset(
-                                          dataMap[index]["char"]!,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                  child: Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    dataMap[index]["Yek"]!,
-                                    style: TextStyle(
-                                        fontSize: scwidth / 14,
-                                        color: Colors.white),
-                                  )
-                                      .animate(
-                                        onPlay: (controller) =>
-                                            controller.repeat(),
-                                      )
-                                      .shimmer(
-                                        duration:
-                                            const Duration(milliseconds: 4444),
-                                        color: Colors.amber,
-                                      ),
-                                ),
-                              ))
-                            ],
-                          );
-                        },
+                            return topWidget(
+                              selectedIndex: selectedIndex,
+                              widget: widget,
+                              value: value,
+                              scwidth: scwidth,
+                              topIndex: widget.yekPageIndex,
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            onPageChanged: (i) => setState(() => selectedIndex = i),
+                    ],
+                  ),
+
+                  //!
+
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: yekinfo.length,
+                    physics: const BouncingScrollPhysics(),
+                    primary: false,
+                    padding: const EdgeInsets.all(20),
+                    itemBuilder: (BuildContext context, int index) {
+                      return YekChartWidget(
+                        bgImagePath: "assets/images/",
+                        title: dataMap[widget.yekPageIndex]["Yek"],
+                        yekIndex: widget.yekPageIndex,
+                        yekColor: itemColor[widget.yekPageIndex],
+                        yekdetailIndex: index,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )
+          //   },
+          //   onPageChanged: (i) => setState(() => selectedIndex = i),
+          // ),
           ),
-        ),
-      );
-    }));
+    )
+            // }),
+            ));
   }
 }
 
