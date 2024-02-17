@@ -12,7 +12,7 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Lei",
         "itemname": "Red Lotus",
-        "asset": "assets/images/redLotus.jpg",
+        "asset": "assets/images/redLotus.png",
       },
       {
         "name": "Hei",

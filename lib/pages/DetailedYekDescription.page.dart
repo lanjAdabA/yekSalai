@@ -130,7 +130,7 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
 
                             // newIndex = widget.yekPageIndex;
 
-                            return topWidget(
+                            return TopWidget(
                               selectedIndex: selectedIndex,
                               widget: widget,
                               value: value,
@@ -203,21 +203,13 @@ class BgStack extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Flow(
-          delegate: ParallaxFlowDelegate(
-              backgroundImageKey: _globalKey,
-              scrollable: Scrollable.of(context),
-              listItemContext: context),
-          children: [
-            AspectRatio(
-              aspectRatio: .9,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-                key: _globalKey,
-              ),
-            ),
-          ],
+        child: AspectRatio(
+          aspectRatio: .9,
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+            key: _globalKey,
+          ),
         ),
       ),
     );
