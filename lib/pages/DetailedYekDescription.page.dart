@@ -7,9 +7,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:yeksalai/constant/constant.dart';
+import 'package:yeksalai/pages/backup.dart';
 // import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/widgets/topWidgetDetailedYekDes.dart';
-import 'package:yeksalai/widgets/yekChartWidget.dart';
 
 @RoutePage()
 class DetailedYekDescriptionPage extends StatefulWidget {
@@ -19,19 +19,28 @@ class DetailedYekDescriptionPage extends StatefulWidget {
 
   @override
   State<DetailedYekDescriptionPage> createState() =>
-      _DetailedYekDescriptionPageState();
+      _DetailedYekDescriptionPageState(
+          yekIndex: yekPageIndex, yekdetailIndex: yekPageIndex);
 }
 
 class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
     with SingleTickerProviderStateMixin {
   int newIndex = 0;
   late PageController _pageController;
-  late Animation<double> _fadeAnimation;
+  // late Animation<double> _fadeAnimation;
 
   late AnimationController _fadeController;
 
   int selectedIndex = 0;
   List yekinfo = [];
+
+  final GlobalKey _backgroundImageKey = GlobalKey();
+
+  final int yekIndex;
+  final int yekdetailIndex;
+
+  _DetailedYekDescriptionPageState(
+      {required this.yekIndex, required this.yekdetailIndex});
 
   @override
   void initState() {
@@ -45,10 +54,10 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
       vsync: this,
       duration: const Duration(milliseconds: 222),
     );
-    _fadeAnimation = Tween<double>(
-      begin: 1,
-      end: 0,
-    ).animate(_fadeController);
+    // _fadeAnimation = Tween<double>(
+    //   begin: 1,
+    //   end: 0,
+    // ).animate(_fadeController);
 
     super.initState();
   }
@@ -131,26 +140,25 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
                           },
                         ),
                       ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: yekinfo.length,
+                        physics: const BouncingScrollPhysics(),
+                        primary: false,
+                        padding: const EdgeInsets.all(20),
+                        itemBuilder: (BuildContext context, int index) {
+                          return ExampleParallax(
+                            yekIndex: yekdetailIndex,
+                            yekdetailIndex: index,
+                          );
+                        },
+                      ),
+                      // LocationListItem(
+                      //     imageUrl: dataMap[yekIndex]["YekInfo"][yekdetailIndex]
+                      //         ['asset'],
+                      //     name: dataMap[widget.yekPageIndex]["Yek"],
+                      //     country: dataMap[widget.yekPageIndex]["Yek"])
                     ],
-                  ),
-
-                  //!
-
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: yekinfo.length,
-                    physics: const BouncingScrollPhysics(),
-                    primary: false,
-                    padding: const EdgeInsets.all(20),
-                    itemBuilder: (BuildContext context, int index) {
-                      return YekChartWidget(
-                        bgImagePath: "assets/images/",
-                        title: dataMap[widget.yekPageIndex]["Yek"],
-                        yekIndex: widget.yekPageIndex,
-                        yekColor: itemColor[widget.yekPageIndex],
-                        yekdetailIndex: index,
-                      );
-                    },
                   ),
                 ],
               ),
@@ -230,7 +238,7 @@ class ParallaxFlowDelegate extends FlowDelegate {
   @override
   BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
     return BoxConstraints.tightFor(
-      height: constraints.maxHeight,
+      width: constraints.maxWidth,
     );
   }
 
@@ -240,19 +248,18 @@ class ParallaxFlowDelegate extends FlowDelegate {
     final scrollableBox = scrollable.context.findRenderObject() as RenderBox;
     final listItemBox = listItemContext.findRenderObject() as RenderBox;
     final listItemOffset = listItemBox.localToGlobal(
-      listItemBox.size.topCenter(Offset.zero),
-      ancestor: scrollableBox,
-    );
+        listItemBox.size.centerLeft(Offset.zero),
+        ancestor: scrollableBox);
 
     // Determine the percent position of this list item within the
     // scrollable area.
     final viewportDimension = scrollable.position.viewportDimension;
     final scrollFraction =
-        (listItemOffset.dx / viewportDimension).clamp(0.0, 1.0);
+        (listItemOffset.dy / viewportDimension).clamp(0.0, 1.0);
 
-    // Calculate the horizontal alignment of the background
+    // Calculate the vertical alignment of the background
     // based on the scroll percent.
-    final horizontalAlignment = Alignment(scrollFraction * 2 - 1, 0);
+    final verticalAlignment = Alignment(0.0, scrollFraction * 2 - 1);
 
     // Convert the background alignment into a pixel offset for
     // painting purposes.
@@ -260,16 +267,14 @@ class ParallaxFlowDelegate extends FlowDelegate {
         (backgroundImageKey.currentContext!.findRenderObject() as RenderBox)
             .size;
     final listItemSize = context.size;
-    final childRect = horizontalAlignment.inscribe(
-      backgroundSize,
-      Offset.zero & listItemSize,
-    );
+    final childRect =
+        verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
 
     // Paint the background.
     context.paintChild(
       0,
       transform:
-          Transform.translate(offset: Offset(childRect.left, 0)).transform,
+          Transform.translate(offset: Offset(0.0, childRect.top)).transform,
     );
   }
 

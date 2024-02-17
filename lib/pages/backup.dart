@@ -1,306 +1,353 @@
-// import 'dart:ui';
+//! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage / DetailedYekDescriptionPage[list of yek assets]
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-// import 'package:auto_route/auto_route.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_animate/flutter_animate.dart';
-// import 'package:yeksalai/constant/constant.dart';
+import '../constant/constant.dart';
 
-// @RoutePage()
-// class NewYekSalaiPage extends StatefulWidget {
-//   final int yekPageIndex;
-//   final Color yekColor;
-//   const NewYekSalaiPage(
-//       {super.key, required this.yekPageIndex, required this.yekColor});
+const Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
-//   @override
-//   State<NewYekSalaiPage> createState() => _NewYekSalaiPageState();
-// }
+class ExampleParallax extends StatelessWidget {
+  final int yekIndex;
+  final int yekdetailIndex;
+  const ExampleParallax({
+    super.key,
+    required this.yekIndex,
+    required this.yekdetailIndex,
+  });
 
-// class _NewYekSalaiPageState extends State<NewYekSalaiPage>
-//     with SingleTickerProviderStateMixin {
-//   late PageController _pageController;
-//   late Animation<double> _fadeAnimation;
-//   late AnimationController _fadeController;
-//   // int selectedIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // for (final location in locations)
+          LocationListItem(
+            imageUrl: dataMap[yekIndex]["YekInfo"][yekdetailIndex]['asset'],
+            name: dataMap[yekIndex]["YekInfo"][yekdetailIndex]["itemname"],
+            // country: dataMap[yekdetailIndex]["Yek"],
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-//   final GlobalKey _globalKey = GlobalKey();
-//   int selectedIndex = 0;
+class LocationListItem extends StatelessWidget {
+  LocationListItem({
+    super.key,
+    required this.imageUrl,
+    required this.name,
+    // required this.country,
+  });
 
-//   @override
-//   void initState() {
-//     _pageController = PageController(
-//       viewportFraction: 1,
-//       initialPage: widget.yekPageIndex,
-//     );
+  final String imageUrl;
+  final String name;
+  // final String country;
+  final GlobalKey _backgroundImageKey = GlobalKey();
 
-//     _fadeController = AnimationController(
-//       vsync: this,
-//       duration:
-//           const Duration(milliseconds: 222), // Adjust the duration as needed
-//     );
-//     _fadeAnimation = Tween<double>(
-//       begin: 1,
-//       end: 0,
-//     ).animate(_fadeController);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            children: [
+              _buildParallaxBackground(context),
+              _buildGradient(),
+              _buildTitleAndSubtitle(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-//     super.initState();
-//   }
+  Widget _buildParallaxBackground(BuildContext context) {
+    return Flow(
+      delegate: ParallaxFlowDelegate(
+        scrollable: Scrollable.of(context),
+        listItemContext: context,
+        backgroundImageKey: _backgroundImageKey,
+      ),
+      children: [
+        Image.asset(
+          imageUrl,
+          key: _backgroundImageKey,
+          fit: BoxFit.cover,
+        ),
+      ],
+    );
+  }
 
-//   @override
-//   void dispose() {
-//     _fadeController.dispose();
-//     _pageController.dispose();
-//     super.dispose();
-//   }
+  Widget _buildGradient() {
+    return Positioned.fill(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.6, 0.95],
+          ),
+        ),
+      ),
+    );
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           backgroundColor: const Color.fromARGB(255, 201, 176, 245),
-//           title: const Text("Dress codes "),
-//         ),
-//         body: LayoutBuilder(builder: (context, constraints) {
-//           return Container(
-//             decoration: const BoxDecoration(
-//               gradient: LinearGradient(
-//                 begin: Alignment.topCenter,
-//                 end: Alignment.bottomLeft,
-//                 stops: [0.1, 0.5, 0.7],
-//                 colors: [
-//                   Color.fromARGB(255, 201, 176, 245),
-//                   Color.fromARGB(255, 225, 211, 248),
-//                   Color.fromARGB(255, 234, 229, 246),
-//                 ],
-//               ),
-//             ),
-//             child: PageView.builder(
-//               controller: _pageController,
-//               itemCount: dataMap.length,
-//               itemBuilder: (context, index) {
-//                 return Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: Stack(
-//                     children: [
-//                       //! -->>
-//                       BgStack(
-//                         imagePath: dataMap[index]
-//                             ["BG"], // Replace with your image path
-//                         isSelected: selectedIndex == index,
-//                       ),
+  Widget _buildTitleAndSubtitle() {
+    return Positioned(
+      left: 20,
+      bottom: 20,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          // Text(
+          //   country,
+          //   style: const TextStyle(
+          //     color: Colors.white,
+          //     fontSize: 14,
+          //   ),
+          // ),
+        ],
+      ),
+    );
+  }
+}
 
-//                       //!-->
-//                       AnimatedBuilder(
-//                         animation: _pageController,
-//                         builder: (context, child) {
-//                           double value = 1.0;
+class ParallaxFlowDelegate extends FlowDelegate {
+  ParallaxFlowDelegate({
+    required this.scrollable,
+    required this.listItemContext,
+    required this.backgroundImageKey,
+  }) : super(repaint: scrollable.position);
 
-//                           // double offset = _pageController.hasClients
-//                           //     ? _pageController.offset
-//                           //     : 0;
-//                           if (_pageController.position.haveDimensions &&
-//                               constraints.maxWidth != 0) {
-//                             value = (_pageController.page! - index).abs();
-//                             value = 1 - (value * 0.5).clamp(0.0, 1.0);
-//                           }
+  final ScrollableState scrollable;
+  final BuildContext listItemContext;
+  final GlobalKey backgroundImageKey;
 
-//                           return Center(
-//                             child: SizedBox(
-//                               height: MediaQuery.of(context).size.height * 0.96,
-//                               width: MediaQuery.of(context).size.width * 0.96,
-//                               child: Stack(
-//                                 fit: StackFit.expand,
-//                                 children: [
-//                                   Transform.translate(
-//                                       filterQuality: FilterQuality.high,
-//                                       offset: Offset(
-//                                         -value *
-//                                             MediaQuery.of(context).size.height *
-//                                             0.01,
-//                                         value *
-//                                             MediaQuery.of(context).size.height *
-//                                             0.15,
-//                                       ),
-//                                       child: FadeTransition(
-//                                         opacity: _fadeAnimation,
-//                                         child: Image.asset(
-//                                           dataMap[index]["splash"]!,
-//                                           fit: BoxFit.contain,
-//                                         ),
-//                                       )
-//                                           .animate()
-//                                           // .effect(
-//                                           //       begin: .5,
-//                                           //       curve: Curves.decelerate,
-//                                           //     )
-//                                           // !-->
-//                                           .fade(
-//                                               duration: const Duration(
-//                                                   milliseconds: 1999))
-//                                       //!->>
-//                                       // .shader()
-//                                       // .rotate(
-//                                       //     duration:
-//                                       //         const Duration(milliseconds: 8888))
+  @override
+  BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
+    return BoxConstraints.tightFor(
+      width: constraints.maxWidth,
+    );
+  }
 
-//                                       // .shimmer()
-//                                       // .blurY(curve: Curves.decelerate
-//                                       //
-//                                       // ),
-//                                       ),
-//                                   Transform.translate(
-//                                     offset: Offset(
-//                                         0.0,
-//                                         value *
-//                                             MediaQuery.of(context).size.height *
-//                                             0.09),
-//                                     child: Image.asset(
-//                                       dataMap[index]["char"]!,
-//                                       fit: BoxFit.contain,
-//                                     ),
-//                                   ),
-//                                   Text(
-//                                     dataMap[index]["Yek"]!,
-//                                     style: const TextStyle(
-//                                         fontSize: 68, color: Colors.white),
-//                                   )
-//                                       .animate(
-//                                         onPlay: (controller) =>
-//                                             controller.repeat(),
-//                                       )
-//                                       .shimmer(
-//                                         duration:
-//                                             const Duration(milliseconds: 4444),
-//                                         color: Colors.amber,
-//                                       ),
-//                                 ],
-//                               ),
-//                             ),
-//                           );
-//                         },
-//                       )
-//                     ],
-//                   ),
-//                 );
-//               },
-//               onPageChanged: (i) => setState(() => selectedIndex = i),
-//             ),
-//           );
-//         }));
-//   }
-// }
+  @override
+  void paintChildren(FlowPaintingContext context) {
+    // Calculate the position of this list item within the viewport.
+    final scrollableBox = scrollable.context.findRenderObject() as RenderBox;
+    final listItemBox = listItemContext.findRenderObject() as RenderBox;
+    final listItemOffset = listItemBox.localToGlobal(
+        listItemBox.size.centerLeft(Offset.zero),
+        ancestor: scrollableBox);
 
-// class BgStack extends StatelessWidget {
-//   final GlobalKey _globalKey = GlobalKey();
+    // Determine the percent position of this list item within the
+    // scrollable area.
+    final viewportDimension = scrollable.position.viewportDimension;
+    final scrollFraction =
+        (listItemOffset.dy / viewportDimension).clamp(0.0, 1.0);
 
-//   BgStack({
-//     super.key,
-//     required this.imagePath,
-//     required this.isSelected,
+    // Calculate the vertical alignment of the background
+    // based on the scroll percent.
+    final verticalAlignment = Alignment(0.0, scrollFraction * 2 - 1);
+
+    // Convert the background alignment into a pixel offset for
+    // painting purposes.
+    final backgroundSize =
+        (backgroundImageKey.currentContext!.findRenderObject() as RenderBox)
+            .size;
+    final listItemSize = context.size;
+    final childRect =
+        verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
+
+    // Paint the background.
+    context.paintChild(
+      0,
+      transform:
+          Transform.translate(offset: Offset(0.0, childRect.top)).transform,
+    );
+  }
+
+  @override
+  bool shouldRepaint(ParallaxFlowDelegate oldDelegate) {
+    return scrollable != oldDelegate.scrollable ||
+        listItemContext != oldDelegate.listItemContext ||
+        backgroundImageKey != oldDelegate.backgroundImageKey;
+  }
+}
+
+class Parallax extends SingleChildRenderObjectWidget {
+  const Parallax({
+    super.key,
+    required Widget background,
+  }) : super(child: background);
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return RenderParallax(scrollable: Scrollable.of(context));
+  }
+
+  @override
+  void updateRenderObject(
+      BuildContext context, covariant RenderParallax renderObject) {
+    renderObject.scrollable = Scrollable.of(context);
+  }
+}
+
+class ParallaxParentData extends ContainerBoxParentData<RenderBox> {}
+
+class RenderParallax extends RenderBox
+    with RenderObjectWithChildMixin<RenderBox>, RenderProxyBoxMixin {
+  RenderParallax({
+    required ScrollableState scrollable,
+  }) : _scrollable = scrollable;
+
+  ScrollableState _scrollable;
+
+  ScrollableState get scrollable => _scrollable;
+
+  set scrollable(ScrollableState value) {
+    if (value != _scrollable) {
+      if (attached) {
+        _scrollable.position.removeListener(markNeedsLayout);
+      }
+      _scrollable = value;
+      if (attached) {
+        _scrollable.position.addListener(markNeedsLayout);
+      }
+    }
+  }
+
+  @override
+  void attach(covariant PipelineOwner owner) {
+    super.attach(owner);
+    _scrollable.position.addListener(markNeedsLayout);
+  }
+
+  @override
+  void detach() {
+    _scrollable.position.removeListener(markNeedsLayout);
+    super.detach();
+  }
+
+  @override
+  void setupParentData(covariant RenderObject child) {
+    if (child.parentData is! ParallaxParentData) {
+      child.parentData = ParallaxParentData();
+    }
+  }
+
+  @override
+  void performLayout() {
+    size = constraints.biggest;
+
+    // Force the background to take up all available width
+    // and then scale its height based on the image's aspect ratio.
+    final background = child!;
+    final backgroundImageConstraints =
+        BoxConstraints.tightFor(width: size.width);
+    background.layout(backgroundImageConstraints, parentUsesSize: true);
+
+    // Set the background's local offset, which is zero.
+    (background.parentData as ParallaxParentData).offset = Offset.zero;
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    // Get the size of the scrollable area.
+    final viewportDimension = scrollable.position.viewportDimension;
+
+    // Calculate the global position of this list item.
+    final scrollableBox = scrollable.context.findRenderObject() as RenderBox;
+    final backgroundOffset =
+        localToGlobal(size.centerLeft(Offset.zero), ancestor: scrollableBox);
+
+    // Determine the percent position of this list item within the
+    // scrollable area.
+    final scrollFraction =
+        (backgroundOffset.dy / viewportDimension).clamp(0.0, 1.0);
+
+    // Calculate the vertical alignment of the background
+    // based on the scroll percent.
+    final verticalAlignment = Alignment(0.0, scrollFraction * 2 - 1);
+
+    // Convert the background alignment into a pixel offset for
+    // painting purposes.
+    final background = child!;
+    final backgroundSize = background.size;
+    final listItemSize = size;
+    final childRect =
+        verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
+
+    // Paint the background.
+    context.paintChild(
+        background,
+        (background.parentData as ParallaxParentData).offset +
+            offset +
+            Offset(0.0, childRect.top));
+  }
+}
+
+// class Location {
+//   const Location({
+//     required this.name,
+//     required this.place,
+//     required this.imageUrl,
 //   });
 
-//   final String imagePath;
-//   final bool isSelected;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedContainer(
-//       duration: const Duration(milliseconds: 250),
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//         borderRadius: BorderRadius.circular(16),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.black.withOpacity(0.3),
-//             offset: const Offset(0, 6),
-//             blurRadius: 8,
-//           ),
-//         ],
-//       ),
-//       child: ClipRRect(
-//         borderRadius: BorderRadius.circular(16),
-//         child: Flow(
-//           delegate: ParallaxFlowDelegate(
-//               backgroundImageKey: _globalKey,
-//               scrollable: Scrollable.of(context),
-//               listItemContext: context),
-//           children: [
-//             AspectRatio(
-//               aspectRatio: .9,
-//               child: Image.asset(
-//                 imagePath,
-//                 fit: BoxFit.cover,
-//                 key: _globalKey,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
+//   final String name;
+//   final String place;
+//   final String imageUrl;
 // }
 
-// class ParallaxFlowDelegate extends FlowDelegate {
-//   ParallaxFlowDelegate({
-//     required this.scrollable,
-//     required this.listItemContext,
-//     required this.backgroundImageKey,
-//   }) : super(repaint: scrollable.position);
-
-//   final ScrollableState scrollable;
-//   final BuildContext listItemContext;
-//   final GlobalKey backgroundImageKey;
-
-//   @override
-//   BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
-//     return BoxConstraints.tightFor(
-//       height: constraints.maxHeight,
-//     );
-//   }
-
-//   @override
-//   void paintChildren(FlowPaintingContext context) {
-//     // Calculate the position of this list item within the viewport.
-//     final scrollableBox = scrollable.context.findRenderObject() as RenderBox;
-//     final listItemBox = listItemContext.findRenderObject() as RenderBox;
-//     final listItemOffset = listItemBox.localToGlobal(
-//       listItemBox.size.topCenter(Offset.zero),
-//       ancestor: scrollableBox,
-//     );
-
-//     // Determine the percent position of this list item within the
-//     // scrollable area.
-//     final viewportDimension = scrollable.position.viewportDimension;
-//     final scrollFraction =
-//         (listItemOffset.dx / viewportDimension).clamp(0.0, 1.0);
-
-//     // Calculate the horizontal alignment of the background
-//     // based on the scroll percent.
-//     final horizontalAlignment = Alignment(scrollFraction * 2 - 1, 0);
-
-//     // Convert the background alignment into a pixel offset for
-//     // painting purposes.
-//     final backgroundSize =
-//         (backgroundImageKey.currentContext!.findRenderObject() as RenderBox)
-//             .size;
-//     final listItemSize = context.size;
-//     final childRect = horizontalAlignment.inscribe(
-//       backgroundSize,
-//       Offset.zero & listItemSize,
-//     );
-
-//     // Paint the background.
-//     context.paintChild(
-//       0,
-//       transform:
-//           Transform.translate(offset: Offset(childRect.left, 0)).transform,
-//     );
-//   }
-
-//   @override
-//   bool shouldRepaint(ParallaxFlowDelegate oldDelegate) {
-//     return scrollable != oldDelegate.scrollable ||
-//         listItemContext != oldDelegate.listItemContext ||
-//         backgroundImageKey != oldDelegate.backgroundImageKey;
-//   }
-// }
+// const urlPrefix =
+//     'https://docs.flutter.dev/cookbook/img-files/effects/parallax';
+// const locations = [
+//   Location(
+//     name: 'Mount Rushmore',
+//     place: 'U.S.A',
+//     imageUrl: '$urlPrefix/01-mount-rushmore.jpg',
+//   ),
+//   Location(
+//     name: 'Gardens By The Bay',
+//     place: 'Singapore',
+//     imageUrl: '$urlPrefix/02-singapore.jpg',
+//   ),
+//   Location(
+//     name: 'Machu Picchu',
+//     place: 'Peru',
+//     imageUrl: '$urlPrefix/03-machu-picchu.jpg',
+//   ),
+//   Location(
+//     name: 'Vitznau',
+//     place: 'Switzerland',
+//     imageUrl: '$urlPrefix/04-vitznau.jpg',
+//   ),
+//   Location(
+//     name: 'Bali',
+//     place: 'Indonesia',
+//     imageUrl: '$urlPrefix/05-bali.jpg',
+//   ),
+//   Location(
+//     name: 'Mexico City',
+//     place: 'Mexico',
+//     imageUrl: '$urlPrefix/06-mexico-city.jpg',
+//   ),
+//   Location(
+//     name: 'Cairo',
+//     place: 'Egypt',
+//     imageUrl: '$urlPrefix/07-cairo.jpg',
+//   ),
+// ];

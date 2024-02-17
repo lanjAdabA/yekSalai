@@ -6,7 +6,6 @@ class YekChartWidget extends StatelessWidget {
   final String title;
   final Color yekColor;
   final int yekIndex;
-
   final int yekdetailIndex;
 
   const YekChartWidget({
