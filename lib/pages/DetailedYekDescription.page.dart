@@ -10,6 +10,7 @@ import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/pages/backup.dart';
 // import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/widgets/topWidgetDetailedYekDes.dart';
+import 'package:parallax_image_ns/parallax_image.dart';
 
 @RoutePage()
 class DetailedYekDescriptionPage extends StatefulWidget {
@@ -74,11 +75,7 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
     double scheight = MediaQuery.of(context).size.height;
     double scwidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: SingleChildScrollView(
-            child:
-                //  LayoutBuilder(builder: (context, constraints) {
-                //   return
-                SwipeDetector(
+        body: SwipeDetector(
       onSwipeDown: (offset) {
         context.router.pop();
 
@@ -105,72 +102,74 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
               //     return
               Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(left: 26, top: 26),
-                        height: scheight / 2.6,
-                        width: scwidth,
-                        child: AnimatedBuilder(
-                          animation: _pageController,
-                          builder: (context, child) {
-                            double value = 1.0;
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    // padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    constraints: const BoxConstraints(maxHeight: 360.0),
+                    padding: const EdgeInsets.only(left: 26, top: 26),
+                    height: scheight / 2.6,
+                    width: scwidth,
+                    child: AnimatedBuilder(
+                      animation: _pageController,
+                      builder: (context, child) {
+                        double value = 1.0;
 
-                            // if (_pageController.position.haveDimensions &&
-                            //     constraints.maxWidth != 0) {
-                            //   value =
-                            //       (_pageController.page! - widget.yekPageIndex)
-                            //           .abs();
-                            //   value = 1 - (value * 0.5).clamp(0.0, 1.0);
-                            // }
+                        // if (_pageController.position.haveDimensions &&
+                        //     constraints.maxWidth != 0) {
+                        //   value =
+                        //       (_pageController.page! - widget.yekPageIndex)
+                        //           .abs();
+                        //   value = 1 - (value * 0.5).clamp(0.0, 1.0);
+                        // }
 
-                            // newIndex = widget.yekPageIndex;
+                        // newIndex = widget.yekPageIndex;
 
-                            return TopWidget(
-                              selectedIndex: selectedIndex,
-                              widget: widget,
-                              value: value,
-                              scwidth: scwidth,
-                              topIndex: widget.yekPageIndex,
-                            );
-                          },
-                        ),
-                      ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: yekinfo.length,
-                        physics: const BouncingScrollPhysics(),
-                        primary: false,
-                        padding: const EdgeInsets.all(20),
-                        itemBuilder: (BuildContext context, int index) {
-                          return ExampleParallax(
-                            yekIndex: yekdetailIndex,
-                            yekdetailIndex: index,
-                          );
-                        },
-                      ),
-                      // LocationListItem(
-                      //     imageUrl: dataMap[yekIndex]["YekInfo"][yekdetailIndex]
-                      //         ['asset'],
-                      //     name: dataMap[widget.yekPageIndex]["Yek"],
-                      //     country: dataMap[widget.yekPageIndex]["Yek"])
-                    ],
+                        return TopWidget(
+                          selectedIndex: selectedIndex,
+                          widget: widget,
+                          value: value,
+                          scwidth: scwidth,
+                          topIndex: widget.yekPageIndex,
+                        );
+                      },
+                    ),
                   ),
-                ],
-              ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Text("LineBreaker"),
+                ),
+                Expanded(
+                  flex: 7,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: yekinfo.length,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    // primary: false,
+                    padding: const EdgeInsets.all(20),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: ParallaxImage(
+                              extent: 260.0,
+                              image: ExactAssetImage(
+                                dataMap[yekdetailIndex]["YekInfo"][index]
+                                    ['asset'],
+                              )),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          )
-          //   },
-          //   onPageChanged: (i) => setState(() => selectedIndex = i),
-          // ),
-          ),
-    )
-            // }),
-            ));
+          )),
+    ));
   }
 }
 
@@ -213,67 +212,5 @@ class BgStack extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class ParallaxFlowDelegate extends FlowDelegate {
-  ParallaxFlowDelegate({
-    required this.scrollable,
-    required this.listItemContext,
-    required this.backgroundImageKey,
-  }) : super(repaint: scrollable.position);
-
-  final ScrollableState scrollable;
-  final BuildContext listItemContext;
-  final GlobalKey backgroundImageKey;
-
-  @override
-  BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) {
-    return BoxConstraints.tightFor(
-      width: constraints.maxWidth,
-    );
-  }
-
-  @override
-  void paintChildren(FlowPaintingContext context) {
-    // Calculate the position of this list item within the viewport.
-    final scrollableBox = scrollable.context.findRenderObject() as RenderBox;
-    final listItemBox = listItemContext.findRenderObject() as RenderBox;
-    final listItemOffset = listItemBox.localToGlobal(
-        listItemBox.size.centerLeft(Offset.zero),
-        ancestor: scrollableBox);
-
-    // Determine the percent position of this list item within the
-    // scrollable area.
-    final viewportDimension = scrollable.position.viewportDimension;
-    final scrollFraction =
-        (listItemOffset.dy / viewportDimension).clamp(0.0, 1.0);
-
-    // Calculate the vertical alignment of the background
-    // based on the scroll percent.
-    final verticalAlignment = Alignment(0.0, scrollFraction * 2 - 1);
-
-    // Convert the background alignment into a pixel offset for
-    // painting purposes.
-    final backgroundSize =
-        (backgroundImageKey.currentContext!.findRenderObject() as RenderBox)
-            .size;
-    final listItemSize = context.size;
-    final childRect =
-        verticalAlignment.inscribe(backgroundSize, Offset.zero & listItemSize);
-
-    // Paint the background.
-    context.paintChild(
-      0,
-      transform:
-          Transform.translate(offset: Offset(0.0, childRect.top)).transform,
-    );
-  }
-
-  @override
-  bool shouldRepaint(ParallaxFlowDelegate oldDelegate) {
-    return scrollable != oldDelegate.scrollable ||
-        listItemContext != oldDelegate.listItemContext ||
-        backgroundImageKey != oldDelegate.backgroundImageKey;
   }
 }

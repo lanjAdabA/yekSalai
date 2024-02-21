@@ -512,6 +512,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  parallax_image_ns:
+    dependency: "direct main"
+    description:
+      name: parallax_image_ns
+      sha256: "45d27e44e26a2ca1c58a6b0bf25618b4f2734c15db9f9a6e4f08a55e05b241f9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2"
   path:
     dependency: transitive
     description:

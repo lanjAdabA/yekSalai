@@ -1,6 +1,7 @@
 //! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage / DetailedYekDescriptionPage[list of yek assets]
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:parallax_image_ns/parallax_image.dart';
 
 import '../constant/constant.dart';
 
@@ -59,6 +60,25 @@ class LocationListItem extends StatelessWidget {
               _buildGradient(),
               _buildTitleAndSubtitle(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVerticalChild(BuildContext context, int index) {
+    index++;
+    if (index > 7) return Container(); //  null safety / harfang
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30.0, right: 15, left: 15),
+      child: GestureDetector(
+        onTap: () {
+          print('Tapped $index');
+        },
+        child: ParallaxImage(
+          extent: 300.0,
+          image: ExactAssetImage(
+            'images/img$index.jpg',
           ),
         ),
       ),

@@ -24,11 +24,13 @@ class TopWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           flex: 1,
           child: Stack(
             fit: StackFit.expand,
+            // alignment: Alignment.topCenter,
             children: [
               BgStack(
                 imagePath: dataMap[topIndex]["BG"],
@@ -38,7 +40,7 @@ class TopWidget extends StatelessWidget {
                   filterQuality: FilterQuality.high,
                   offset: Offset(
                     -value * MediaQuery.of(context).size.height * 0.01,
-                    value * MediaQuery.of(context).size.height * 0.15,
+                    value * MediaQuery.of(context).size.height * 0.03,
                   ),
                   child: Hero(
                     tag: "splash$topIndex",
@@ -49,7 +51,7 @@ class TopWidget extends StatelessWidget {
                   )),
               Transform.translate(
                 offset: Offset(
-                    0.0, value * MediaQuery.of(context).size.height * 0.09),
+                    0.0, value * MediaQuery.of(context).size.height * 0.04),
                 child: Hero(
                   tag: "char$topIndex",
                   child: Image.asset(
@@ -62,48 +64,52 @@ class TopWidget extends StatelessWidget {
           ),
         ),
         Expanded(
+            flex: 1,
             child: Padding(
-          padding: const EdgeInsets.only(left: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                dataMap[topIndex]["Yek"]!,
-                style: TextStyle(fontSize: scwidth / 14, color: Colors.white),
-              )
-                  .animate(
-                    onPlay: (controller) => controller.repeat(),
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    dataMap[topIndex]["Yek"]!,
+                    style:
+                        TextStyle(fontSize: scwidth / 14, color: Colors.white),
                   )
-                  .shimmer(
-                    duration: const Duration(milliseconds: 4444),
-                    color: Colors.amber,
-                  ),
-              Text(
-                "YEK in meteimayek",
-                style: TextStyle(fontSize: scwidth / 18, color: Colors.white),
-              )
-                  .animate(
-                    onPlay: (controller) => controller.repeat(),
+                      .animate(
+                        onPlay: (controller) => controller.repeat(),
+                      )
+                      .shimmer(
+                        duration: const Duration(milliseconds: 4444),
+                        color: Colors.amber,
+                      ),
+                  Text(
+                    "YEK in meteimayek",
+                    style:
+                        TextStyle(fontSize: scwidth / 18, color: Colors.white),
                   )
-                  .shimmer(
-                    duration: const Duration(milliseconds: 4444),
-                    color: Colors.amber,
-                  ),
-              Text(
-                "brief descriptions...",
-                style: TextStyle(fontSize: scwidth / 24, color: Colors.white),
-              )
-                  .animate(
-                    onPlay: (controller) => controller.repeat(),
+                      .animate(
+                        onPlay: (controller) => controller.repeat(),
+                      )
+                      .shimmer(
+                        duration: const Duration(milliseconds: 4444),
+                        color: Colors.amber,
+                      ),
+                  Text(
+                    "brief descriptions...",
+                    style:
+                        TextStyle(fontSize: scwidth / 24, color: Colors.white),
                   )
-                  .shimmer(
-                    duration: const Duration(milliseconds: 4444),
-                    color: Colors.amber,
-                  ),
-            ],
-          ),
-        ))
+                      .animate(
+                        onPlay: (controller) => controller.repeat(),
+                      )
+                      .shimmer(
+                        duration: const Duration(milliseconds: 4444),
+                        color: Colors.amber,
+                      ),
+                ],
+              ),
+            ))
       ],
     );
   }
