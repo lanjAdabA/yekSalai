@@ -263,6 +263,7 @@ class BgStack extends StatelessWidget {
             AspectRatio(
               aspectRatio: .9,
               child: Image.asset(
+                opacity: const AlwaysStoppedAnimation(.8),
                 imagePath,
                 fit: BoxFit.cover,
                 key: _globalKey,

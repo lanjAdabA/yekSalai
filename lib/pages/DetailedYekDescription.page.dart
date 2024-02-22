@@ -5,10 +5,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:yeksalai/constant/constant.dart';
-import 'package:yeksalai/pages/backup.dart';
-// import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/widgets/topWidgetDetailedYekDes.dart';
 import 'package:parallax_image_ns/parallax_image.dart';
 
@@ -156,11 +155,39 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: ParallaxImage(
-                              extent: 260.0,
-                              image: ExactAssetImage(
-                                dataMap[yekdetailIndex]["YekInfo"][index]
-                                    ['asset'],
-                              )),
+                            color: Colors.transparent,
+                            extent: 260.0,
+                            image: ExactAssetImage(
+                              dataMap[yekdetailIndex]["YekInfo"][index]
+                                  ['asset'],
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Text(
+                                    dataMap[yekIndex]["YekInfo"][index]
+                                        ["itemname"],
+                                    style: TextStyle(
+                                        fontSize: scwidth / 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  )
+                                      .animate(
+                                        onPlay: (controller) =>
+                                            controller.repeat(),
+                                      )
+                                      .shimmer(
+                                        duration:
+                                            const Duration(milliseconds: 4444),
+                                        color: Colors.grey,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -205,6 +232,7 @@ class BgStack extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: .9,
           child: Image.asset(
+            opacity: const AlwaysStoppedAnimation(.8),
             imagePath,
             fit: BoxFit.cover,
             key: _globalKey,
