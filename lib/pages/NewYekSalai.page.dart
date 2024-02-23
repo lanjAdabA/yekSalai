@@ -1,3 +1,4 @@
+//! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage
 import 'dart:developer';
 import 'dart:ui';
 
@@ -7,7 +8,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:yeksalai/constant/constant.dart';
 import 'package:yeksalai/router/router.gr.dart';
-//! / landing page / DashBoardPage/ ListWheelScroll / NewYekSalaiPage
 
 @RoutePage()
 class NewYekSalaiPage extends StatefulWidget {
@@ -30,29 +30,29 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage>
   final GlobalKey _globalKey = GlobalKey();
   int selectedIndex = 0;
 
-  Future<void> _navigateAndDisplaySelection(
-      BuildContext context, int index) async {
-    // Navigator.push returns a Future that completes after calling
-    // Navigator.pop on the Selection Screen.
-    final result = await context.router
-        .push(DetailedYekDescriptionRoute(yekPageIndex: index));
+  // Future<void> _navigateAndDisplaySelection(
+  //     BuildContext context, int index) async {
+  //   // Navigator.push returns a Future that completes after calling
+  //   // Navigator.pop on the Selection Screen.
+  //   final result = await context.router
+  //       .push(DetailedYekDescriptionRoute(yekPageIndex: index));
 
-    log(result.toString());
+  //   log(result.toString());
 
-    // When a BuildContext is used from a StatefulWidget, the mounted property
-    // must be checked after an asynchronous gap.
-    if (!mounted) return;
+  //   // When a BuildContext is used from a StatefulWidget, the mounted property
+  //   // must be checked after an asynchronous gap.
+  //   if (!mounted) return;
 
-    // After the Selection Screen returns a result, hide any previous snackbars
-    // and show the new result.
-    if (result != null) {
-      _pageController.jumpToPage(int.parse(result.toString()));
-    }
+  //   // After the Selection Screen returns a result, hide any previous snackbars
+  //   // and show the new result.
+  //   if (result != null) {
+  //     _pageController.jumpToPage(int.parse(result.toString()));
+  //   }
 
-    // ScaffoldMessenger.of(context)
-    //   ..removeCurrentSnackBar()
-    //   ..showSnackBar(SnackBar(content: Text('$result')));
-  }
+  //   // ScaffoldMessenger.of(context)
+  //   //   ..removeCurrentSnackBar()
+  //   //   ..showSnackBar(SnackBar(content: Text('$result')));
+  // }
 
   @override
   void initState() {
@@ -123,9 +123,17 @@ class _NewYekSalaiPageState extends State<NewYekSalaiPage>
                       }
 
                       return GestureDetector(
+                        onTap: () {
+                          context.router.push(
+                              DetailedYekDescriptionRoute(yekPageIndex: index));
+                          log("gestureDectoctor @ NewYekSalaiPage ");
+                        },
                         child: SwipeDetector(
                           onSwipeUp: (offset) {
-                            _navigateAndDisplaySelection(context, index);
+                            context.router.push(DetailedYekDescriptionRoute(
+                                yekPageIndex: index));
+                            log("SwipeDectoctor @ NewYekSalaiPage ");
+
                             // context.router.push(
                             //   DetailedYekDescriptionRoute(
                             //     yekPageIndex: index)
@@ -267,7 +275,17 @@ class BgStack extends StatelessWidget {
                 imagePath,
                 fit: BoxFit.cover,
                 key: _globalKey,
-              ),
+              )
+                  .animate(
+                    onPlay: (controller) => controller.repeat(),
+                  )
+                  .shimmer(
+                    curve: const ElasticOutCurve(3), size: .7,
+                    //  angle: .86,
+                    duration: const Duration(milliseconds: 5000),
+
+                    // color: dataMap[yekIndex]["YekInfo"][yekPageIndex]["color"],
+                  ),
             ),
           ],
         ),

@@ -35,6 +35,8 @@ class TopWidget extends StatelessWidget {
               BgStack(
                 imagePath: dataMap[topIndex]["BG"],
                 isSelected: selectedIndex == widget.yekPageIndex,
+                yekPageIndex: widget.yekPageIndex,
+                yekIndex: widget.yekPageIndex,
               ),
               Transform.translate(
                   filterQuality: FilterQuality.high,

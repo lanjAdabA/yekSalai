@@ -1,3 +1,6 @@
+//! / landing page / OnButtonPressedPopUp [will popup on backAction either on
+//! dashboardPage or on SearchPage]
+
 import 'package:flutter/material.dart';
 
 class OnButtonPressedPopUp extends StatelessWidget {

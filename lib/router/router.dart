@@ -35,5 +35,9 @@ class AppRouter extends $AppRouter {
           path: '/detailedYekDescription',
           page: DetailedYekDescriptionRoute.page,
         ),
+        AutoRoute(
+          path: '/itemDescription',
+          page: ItemDescriptionRoute.page,
+        ),
       ];
 }
