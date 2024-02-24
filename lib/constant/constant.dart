@@ -10,14 +10,18 @@ List<Map<String, dynamic>> dataMap = [
     "char": "assets/images/char/char1.png",
     "splash": "assets/images/splash/red.png",
     "YekInfo": [
-      {"name": "Machu", "itemname": "Red", "asset": "assets/images/red.png"},
       {
-        "name": "Lei",
+        "name": "Machu",
+        "itemname": "Red",
+        "asset": "assets/images/color/oilRed.png"
+      },
+      {
+        "name": "Lei/ Flower",
         "itemname": "Red Lotus",
         "asset": "assets/images/redLotus.png",
       },
       {
-        "name": "Hei",
+        "name": "Hei/ Fruit",
         "itemname": "Thamchet",
         "asset": "assets/images/thamchet.png"
       },
@@ -49,11 +53,15 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Machu",
         "itemname": "White",
-        "asset": "assets/images/white.png"
+        "asset": "assets/images/color/oilWhite.png"
       },
-      {"name": "Lei", "itemname": "Melei", "asset": "assets/images/melei.png"},
       {
-        "name": "Hei",
+        "name": "Lei/ Flower",
+        "itemname": "Melei",
+        "asset": "assets/images/melei.png"
+      },
+      {
+        "name": "Hei/ Fruit",
         "itemname": "Pineapple",
         "asset": "assets/images/pineapple.png"
       },
@@ -85,15 +93,15 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Machu",
         "itemname": "Black",
-        "asset": "assets/images/black.png"
+        "asset": "assets/images/color/oilBlack.png"
       },
       {
-        "name": "Lei",
+        "name": "Lei/ Flower",
         "itemname": "Leishang",
         "asset": "assets/images/leishang.png"
       },
       {
-        "name": "Hei",
+        "name": "Hei/ Fruit",
         "itemname": "Heibong",
         "asset": "assets/images/heibong.png"
       },
@@ -125,15 +133,15 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Machu",
         "itemname": "Yellow",
-        "asset": "assets/images/yellow.png"
+        "asset": "assets/images/color/oilYellow.png"
       },
       {
-        "name": "Lei",
+        "name": "Lei/ Flower",
         "itemname": "Tharo Angouba",
         "asset": "assets/images/tharoAngouba.png"
       },
       {
-        "name": "Hei",
+        "name": "Hei/ Fruit",
         "itemname": "Heibong",
         "asset": "assets/images/heibong.png"
       },
@@ -161,15 +169,15 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Machu",
         "itemname": "Brown",
-        "asset": "assets/images/brown.png"
+        "asset": "assets/images/color/oilBrown.png"
       },
       {
-        "name": "Lei",
+        "name": "Lei/ Flower",
         "itemname": "Yerum Lei",
         "asset": "assets/images/yerumlei.png"
       },
       {
-        "name": "Hei",
+        "name": "Hei/ Fruit",
         "itemname": "Heitup",
         "asset": "assets/images/heitup.png"
       },
@@ -192,15 +200,19 @@ List<Map<String, dynamic>> dataMap = [
     "color": Colors.teal,
     "BG": "assets/images/BG/blueBG.jpg",
     "char": "assets/images/char/char6.png",
-    "splash": "assets/images/splash/blue.png",
+    "splash": "assets/images/splash/color/oilTeal.png",
     "YekInfo": [
       {"name": "Machu", "itemname": "Blue", "asset": "assets/images/teal.png"},
       {
-        "name": "Lei",
+        "name": "Lei/ Flower",
         "itemname": "Leishang",
         "asset": "assets/images/leishang.png"
       },
-      {"name": "Hei", "itemname": "Heiba", "asset": "assets/images/heiba.png"},
+      {
+        "name": "Hei/ Fruit",
+        "itemname": "Heiba",
+        "asset": "assets/images/heiba.png"
+      },
       {
         "name": "Nga",
         "itemname": "Sareng Ngangna Langba",
@@ -225,15 +237,15 @@ List<Map<String, dynamic>> dataMap = [
       {
         "name": "Machu",
         "itemname": "Green",
-        "asset": "assets/images/green.png"
+        "asset": "assets/images/color/oilGreen.png"
       },
       {
-        "name": "Lei",
+        "name": "Lei/ Flower",
         "itemname": "Leishang",
         "asset": "assets/images/leishang.png"
       },
       {
-        "name": "Hei",
+        "name": "Hei/ Fruit",
         "itemname": "Hei Manam Naiba",
         "asset": "assets/images/manamNaiba.png"
       },
