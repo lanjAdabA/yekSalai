@@ -39,5 +39,37 @@ class AppRouter extends $AppRouter {
           path: '/itemDescription',
           page: ItemDescriptionRoute.page,
         ),
+        AutoRoute(
+          path: '/yekThoknaba',
+          page: YekThoknabaRoute.page,
+        ),
+        AutoRoute(
+          path: '/yelhen',
+          page: YelhenRoute.page,
+        ),
+        AutoRoute(
+          path: '/hourakfam',
+          page: HourakfamRoute.page,
+        ),
+        AutoRoute(
+          path: '/machuThangLei',
+          page: MachuThangLeiRoute.page,
+        ),
+        AutoRoute(
+          path: '/anangMaming',
+          page: AnangMamingRoute.page,
+        ),
+        AutoRoute(
+          path: '/laipu',
+          page: LaipuRoute.page,
+        ),
+        AutoRoute(
+          path: '/apokpaKhoirambaNumit',
+          page: ApokpaKhoirambaNumitRoute.page,
+        ),
+        // AutoRoute(
+        //   path: '/yekThoknaba',
+        //   page: YekThoknabaRoute.page,
+        // ),
       ];
 }

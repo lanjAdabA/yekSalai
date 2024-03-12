@@ -1,8 +1,10 @@
 //! / landing page / DashBoardPage/ carouselSliderBuilder
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yeksalai/router/router.gr.dart';
 
 class carouselSliderBuilder extends StatefulWidget {
   const carouselSliderBuilder(
@@ -84,41 +86,65 @@ class _carouselSliderBuilderState extends State<carouselSliderBuilder> {
             // todo ->> color
             // Color color = dataMap[index]["Machu"];
 
-            return Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18)),
-              color: Colors.deepPurple.withOpacity(.25),
-              // todo ->> color
-              // color: color,
-              child: Container(
-                padding: const EdgeInsets.all(
-                    12), // height: MediaQuery.of(context).size.width / 2,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.rowdies(
-                          fontSize: 24, color: Colors.white),
-                    ),
+            return GestureDetector(
+              onTap: () {
+                switch (index) {
+                  case 0:
+                    context.router.push(const YekThoknabaRoute());
+                  case 1:
+                    context.router.push(const YelhenRoute());
+                  case 2:
+                    context.router.push(const HourakfamRoute());
+                  case 3:
+                    context.router.push(const MachuThangLeiRoute());
+                  case 4:
+                    context.router.push(const AnangMamingRoute());
+                  case 5:
+                    context.router.push(const LaipuRoute());
+                  case 6:
+                    context.router.push(const ApokpaKhoirambaNumitRoute());
 
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      content,
-                      style: TextStyle(fontSize: 20, color: Colors.grey[300]),
-                    ),
-                    // FittedBox(
-                    //   child: Text(
-                    //     MoreDescription,
-                    //     style: TextStyle(fontSize: 18, color: Colors.grey[800]),
-                    //   ),
-                    // )
-                  ],
+                    break;
+                  default:
+                }
+                // context.router.push(),
+              },
+              child: Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)),
+                color: Colors.deepPurple.withOpacity(.25),
+                // todo ->> color
+                // color: color,
+                child: Container(
+                  padding: const EdgeInsets.all(
+                      12), // height: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.rowdies(
+                            fontSize: 24, color: Colors.white),
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        content,
+                        style: TextStyle(fontSize: 20, color: Colors.grey[300]),
+                      ),
+                      // FittedBox(
+                      //   child: Text(
+                      //     MoreDescription,
+                      //     style: TextStyle(fontSize: 18, color: Colors.grey[800]),
+                      //   ),
+                      // )
+                    ],
+                  ),
                 ),
               ),
             );
