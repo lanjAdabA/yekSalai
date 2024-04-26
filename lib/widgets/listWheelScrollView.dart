@@ -21,7 +21,7 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
       textColor = Colors.grey;
     }
     return TextStyle(
-      fontSize: 38,
+      fontSize: 32,
       color: textColor,
       fontWeight: FontWeight.bold,
     );
@@ -42,12 +42,12 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
           // context.router.push(YekSalaiRoute(yekIndex: selectedIndex));
           // print(selectedIndex.toString());
         },
-        itemExtent: 120,
-        diameterRatio: 2.4,
+        itemExtent: 80,
+        diameterRatio: 2.8,
         // offAxisFraction: 1,
         physics: const BouncingScrollPhysics(),
         squeeze: 1,
-        perspective: 0.002, clipBehavior: Clip.antiAlias,
+        perspective: 0.004, clipBehavior: Clip.antiAlias,
         children: dataMap.map((e) {
           return GestureDetector(
             onTap: () {
@@ -60,7 +60,7 @@ class _ListWheelScrollState extends State<ListWheelScroll> {
               );
             },
             child: Container(
-              height: screenHeight / 4,
+              height: screenHeight / 6,
               width: screenWidth,
               decoration: BoxDecoration(
                   color: e["color"], borderRadius: BorderRadius.circular(12)),

@@ -33,26 +33,30 @@ class YelhenPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              RichText(
-                text: const TextSpan(
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  text: 'Yelhen ',
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '(Prohibited/Forbidden foods) : \n',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    TextSpan(
-                      text:
-                          'Every meitei clans has their own prohibitions on specific foods. \n',
-                      style: TextStyle(fontWeight: FontWeight.normal),
-                    ),
-                    TextSpan(text: "\n"),
-                    TextSpan(
-                      text: 'Below are list of yelhen for the seven clans. \n',
-                      style: TextStyle(fontWeight: FontWeight.normal),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    text: 'Yelhen ',
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '(Prohibited/Forbidden foods) : \n',
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      TextSpan(
+                        text:
+                            'Every meitei clans has their own prohibitions on specific foods. \n',
+                        style: TextStyle(fontWeight: FontWeight.normal),
+                      ),
+                      TextSpan(text: "\n"),
+                      TextSpan(
+                        text:
+                            'Below are list of yelhen for the seven clans. \n',
+                        style: TextStyle(fontWeight: FontWeight.normal),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               ListView.builder(
@@ -61,12 +65,19 @@ class YelhenPage extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 18),
                       child: Row(
                         children: [
                           // Text("0${index + 1}" ".\t"),
-                          Text(dataMap[index]["Yek"] + "\t - \t"),
-                          Text(dataMap[index]["Yelhen"]),
+                          Text(
+                            dataMap[index]["Yek"] + "\t - \t",
+                            // style: const TextStyle(fontSize: 24),
+                          ),
+                          Text(
+                            dataMap[index]["Yelhen"],
+                            // style: const TextStyle(fontSize: 24),
+                          ),
                         ],
                       ),
                     ),

@@ -2,6 +2,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:yeksalai/widgets/searchCardWidget.dart';
 
 @RoutePage()
 class YekThoknabaPage extends StatelessWidget {
@@ -9,6 +10,7 @@ class YekThoknabaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 201, 176, 245),
@@ -16,12 +18,6 @@ class YekThoknabaPage extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-          // image: DecorationImage(
-          //     scale: 2,
-          //     alignment: Alignment(0, -.9),
-          //     image: AssetImage(
-          //       "assets/images/SanamahiLogo.png",
-          //     )),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomLeft,
@@ -33,8 +29,13 @@ class YekThoknabaPage extends StatelessWidget {
             ],
           ),
         ),
-        child: const Column(
-          children: [Text("yekthoknaba")],
+        child: Column(
+          children: [
+            SearchCardWidget(screenHeight: screenHeight),
+            SizedBox(
+              height: screenHeight / 54,
+            ),
+          ],
         ),
       ),
     );

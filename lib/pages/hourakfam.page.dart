@@ -16,12 +16,7 @@ class HourakfamPage extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-          // image: DecorationImage(
-          //     scale: 2,
-          //     alignment: Alignment(0, -.9),
-          //     image: AssetImage(
-          //       "assets/images/SanamahiLogo.png",
-          //     )),
+
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomLeft,

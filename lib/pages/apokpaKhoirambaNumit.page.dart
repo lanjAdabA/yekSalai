@@ -2,6 +2,7 @@
 
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:yeksalai/constant/constant.dart';
 
 @RoutePage()
 class ApokpaKhoirambaNumitPage extends StatelessWidget {
@@ -33,8 +34,63 @@ class ApokpaKhoirambaNumitPage extends StatelessWidget {
             ],
           ),
         ),
-        child: const Column(
-          children: [Text("ApokpaKhoirambaNumitPage")],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    text: 'Apokpa Khoiramba Numit \n',
+                    children: <TextSpan>[
+                      TextSpan(
+                        text:
+                            "(Day for worshiping clan's Ancestral God) : \n \n",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      TextSpan(
+                        text:
+                            "Meitei clans have a specific date on which they worship their clan's Ancestral God. \n",
+                        style: TextStyle(fontWeight: FontWeight.normal),
+                      ),
+                      TextSpan(text: "\n"),
+                      // TextSpan(
+                      //   text: 'Below are list of yelhen for the seven clans. \n',
+                      //   style: TextStyle(fontWeight: FontWeight.normal),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: dataMap.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 18),
+                      child: Row(
+                        children: [
+                          // Text("0${index + 1}" ".\t"),
+                          Text(
+                            dataMap[index]["Yek"] + "\t - \t",
+                            // style: const TextStyle(fontSize: 24),
+                          ),
+                          Text(
+                            dataMap[index]["ApokpaKhoirambaNumit"],
+                            // style: const TextStyle(fontSize: 24),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

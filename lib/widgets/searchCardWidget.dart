@@ -70,7 +70,7 @@ class _SearchCardWidgetState extends State<SearchCardWidget> {
                     ),
                   ),
                   child: Text(
-                    'Switch to ꯃꯦꯏꯇꯦꯏ ꯃꯥꯌꯦꯛ꯫',
+                    'Switch to English',
                     style: TextStyle(
                         fontSize: 16,
                         color: _languageIsEnglish ? Colors.blue : Colors.black),
@@ -92,7 +92,7 @@ class _SearchCardWidgetState extends State<SearchCardWidget> {
                     ),
                   ),
                   child: Text(
-                    'Switch to English',
+                    'Switch to ꯃꯦꯏꯇꯦꯏ ꯃꯥꯌꯦꯛ꯫',
                     style: TextStyle(
                         fontSize: 16,
                         color: _languageIsEnglish ? Colors.black : Colors.blue),
@@ -126,10 +126,10 @@ class TextFieldsData extends StatelessWidget {
       children: [
         SizedBox(
             height: 20,
-            width: !_languageIsEnglish ? screenWidth / 1.8 : screenWidth / 2.4,
+            width: _languageIsEnglish ? screenWidth / 1.8 : screenWidth / 2.4,
             child: Marquee(
               key: Key("$_languageIsEnglish"),
-              text: !_languageIsEnglish
+              text: _languageIsEnglish
                   ? 'Enter Surname/Yumnak in the field provided below.'
                   : "ꯃꯈꯥꯒꯤ ꯐꯤꯜꯗ ꯑꯁꯤꯗꯥ ꯌꯨꯃꯅꯥꯛ ꯃꯦꯅꯕꯤꯌꯨ꯫",
               style: const TextStyle(fontWeight: FontWeight.bold),
@@ -165,7 +165,7 @@ class TextFieldsData extends StatelessWidget {
                 prefixIcon: const Icon(Icons.search),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(7)),
-                hintText: !_languageIsEnglish
+                hintText: _languageIsEnglish
                     ? 'Type your surname here'
                     : "ꯌꯨꯃꯅꯛ ꯃꯦꯅꯕꯤꯌꯨ꯫",
               ),
@@ -187,7 +187,7 @@ class TextFieldsData extends StatelessWidget {
               height: 50,
               child: Center(
                 child: Text(
-                  !_languageIsEnglish ? 'Search' : "ꯊꯤꯕ",
+                  _languageIsEnglish ? 'Search' : "ꯊꯤꯕ",
                   style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
@@ -206,10 +206,10 @@ class TextFieldsData extends StatelessWidget {
           child: SizedBox(
               height: 20,
               width:
-                  !_languageIsEnglish ? screenWidth / 1.46 : screenWidth / 2.2,
+                  _languageIsEnglish ? screenWidth / 1.46 : screenWidth / 2.2,
               child: Marquee(
                 key: Key("$_languageIsEnglish"),
-                text: !_languageIsEnglish
+                text: _languageIsEnglish
                     ? 'Enter Surname/Yumnak in the fields provided below to compare.'
                     : "ꯃꯈꯥꯒꯤ ꯐꯤꯜꯗ ꯑꯁꯤꯗꯥ ꯌꯨꯃꯅꯥꯛ ꯃꯦꯟꯁꯤꯅꯕꯤꯌꯨ꯫",
                 style: const TextStyle(fontWeight: FontWeight.bold),
@@ -246,7 +246,7 @@ class TextFieldsData extends StatelessWidget {
                 prefixIcon: const Icon(Icons.search),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(7)),
-                hintText: !_languageIsEnglish
+                hintText: _languageIsEnglish
                     ? 'Enter surname1'
                     : "ꯑꯍꯥꯅꯕꯥ ꯌꯨꯃꯅꯛ ꯃꯦꯅꯁꯤꯅꯕꯤꯌꯨ꯫",
               ),
@@ -268,7 +268,7 @@ class TextFieldsData extends StatelessWidget {
                 prefixIcon: const Icon(Icons.search),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(7)),
-                hintText: !_languageIsEnglish
+                hintText: _languageIsEnglish
                     ? 'Enter surname2'
                     : "ꯑꯅꯤꯁꯨꯕꯥ ꯌꯨꯃꯅꯛ ꯃꯦꯅꯁꯤꯅꯕꯤꯌꯨ꯫",
               ),
@@ -290,7 +290,7 @@ class TextFieldsData extends StatelessWidget {
               height: 50,
               child: Center(
                 child: Text(
-                  !_languageIsEnglish ? 'Compare' : "ꯆꯥꯡꯗꯝꯅꯕ",
+                  _languageIsEnglish ? 'Compare' : "ꯆꯥꯡꯗꯝꯅꯕ",
                   style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),

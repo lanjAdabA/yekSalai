@@ -153,7 +153,7 @@ class _CustomNavigationHomePageState extends State<CustomNavigationHomePage> {
                 selectedItemColor: const Color.fromARGB(255, 162, 16, 206),
                 unselectedItemColor: const Color.fromARGB(255, 158, 160, 155),
                 currentIndex: selectedIndex,
-                selectedFontSize: 18,
+                selectedFontSize: 16,
                 showSelectedLabels: true,
                 showUnselectedLabels: true,
                 unselectedFontSize: 10,

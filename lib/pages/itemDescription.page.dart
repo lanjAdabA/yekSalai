@@ -37,7 +37,7 @@ class ItemDescriptionPage extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
                 const Padding(
@@ -65,7 +65,8 @@ class ItemDescriptionPage extends StatelessWidget {
                             dataMap[yekdetailIndex]["YekInfo"][yekIndex]
                                 ["itemname"],
                             style: TextStyle(
-                                fontSize: scwidth / 14,
+                                // fontSize: scwidth / 28,
+                                fontSize: scwidth / 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey[50]),
                           )
@@ -96,12 +97,15 @@ class ItemDescriptionPage extends StatelessWidget {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.info_outline),
+                          Icon(
+                            Icons.info_outline,
+                            size: 15,
+                          ),
                           Padding(
                             padding: EdgeInsets.only(left: 8.0),
                             child: Text(
                               "info",
-                              style: TextStyle(fontSize: 28),
+                              style: TextStyle(fontSize: 15),
                             ),
                           )
                         ],
@@ -120,19 +124,19 @@ class ItemDescriptionPage extends StatelessWidget {
                                 dataMap[yekdetailIndex]["Yek"] +
                                 " : ",
                             style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                           Text(
                             dataMap[yekdetailIndex]["YekInfo"][yekIndex]
                                 ["itemname"],
-                            style: const TextStyle(fontSize: 24),
+                            style: const TextStyle(fontSize: 15),
                           ),
                         ],
                       ),
                       const Text(
                         "Scientific name : ",
                         style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       // RichText(
                       //   text: const TextSpan(
@@ -141,7 +145,7 @@ class ItemDescriptionPage extends StatelessWidget {
                       //       backgroundColor: Colors.red,
                       //       color: Colors.blue,
                       //       fontWeight: FontWeight.bold,
-                      //       fontSize: 24,
+                      //       fontSize: 15,
                       //     ),
 
                       // children: [
@@ -166,7 +170,7 @@ class ItemDescriptionPage extends StatelessWidget {
                       //     style: TextStyle(
                       //       fontStyle: FontStyle.italic,
                       //       color: Colors.pink,
-                      //       fontSize: 18,
+                      //       fontSize: 15,
                       //     ),
                       //   ),
                       // ],

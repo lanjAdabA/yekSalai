@@ -146,7 +146,6 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
                   ),
                   const Padding(
                     padding: EdgeInsets.all(12.0),
-                    child: Text("LineBreaker"),
                   ),
                   Expanded(
                     flex: 7,
@@ -185,7 +184,7 @@ class _DetailedYekDescriptionPageState extends State<DetailedYekDescriptionPage>
                                         dataMap[yekIndex]["YekInfo"][index]
                                             ["itemname"],
                                         style: TextStyle(
-                                            fontSize: scwidth / 14,
+                                            fontSize: scwidth / 20,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.grey[200]),
                                       )

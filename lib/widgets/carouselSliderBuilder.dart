@@ -75,7 +75,7 @@ class _carouselSliderBuilderState extends State<carouselSliderBuilder> {
     return Column(
       children: [
         const SizedBox(
-          height: 40,
+          height: 6,
         ),
         CarouselSlider.builder(
           itemCount: dataMap.length,
@@ -127,22 +127,15 @@ class _carouselSliderBuilderState extends State<carouselSliderBuilder> {
                       Text(
                         title,
                         style: GoogleFonts.rowdies(
-                            fontSize: 24, color: Colors.white),
+                            fontSize: 20, color: Colors.white),
                       ),
-
                       const SizedBox(
-                        height: 20,
+                        height: 18,
                       ),
                       Text(
                         content,
-                        style: TextStyle(fontSize: 20, color: Colors.grey[300]),
+                        style: TextStyle(fontSize: 15, color: Colors.grey[300]),
                       ),
-                      // FittedBox(
-                      //   child: Text(
-                      //     MoreDescription,
-                      //     style: TextStyle(fontSize: 18, color: Colors.grey[800]),
-                      //   ),
-                      // )
                     ],
                   ),
                 ),
@@ -151,7 +144,7 @@ class _carouselSliderBuilderState extends State<carouselSliderBuilder> {
           },
           carouselController: _controller,
           options: CarouselOptions(
-            height: 200,
+            height: 160,
             // aspectRatio: 1.6,
             disableCenter: false,
             enableInfiniteScroll: true,
@@ -160,7 +153,7 @@ class _carouselSliderBuilderState extends State<carouselSliderBuilder> {
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
-            viewportFraction: .6,
+            viewportFraction: .7,
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;
